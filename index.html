@@ -25,7 +25,79 @@
     <!-- Link to CSS sheet -->
     <link rel="stylesheet" href="main.css" />
   </head>
-  <body>
+  <body class="grid-x grid-padding">
+    <!-- header -->
+    <header class="row grid-x small-12 align-center align-middle">
+      <i class="fad fa-dumbbell fa-6x"></i>
+    </header>
+    <!-- Headline -->
+    <div class="grid-x small-12 align-center align-middle">
+      <h3>Choose Your Workout</h3>
+    </div>
+    <!-- form -->
+    <form
+      class="row grid-x grid-padding small-12 medium-8 large-6 medium-offset-2 large-offset-3 input-box align-center align-middle"
+    >
+      <!-- type of workout -->
+      <div class="row small-12 medium-8">
+        <label
+          >Type of Workout
+          <select>
+            <option class="type" value="8">Arms</option>
+            <option class="type" value="9">Legs</option>
+            <option class="type" value="10">Abs</option>
+            <option class="type" value="11">Chest</option>
+            <option class="type" value="12">Back</option>
+            <option class="type" value="13">Shoulders</option>
+            <option class="type" value="14">Calves</option>
+          </select>
+        </label>
+      </div>
+      <!-- workout intensity -->
+      <div class="row small-12 medium-8">
+        <label
+          >Workout Intensity
+          <select>
+            <option class="intensity" value="easy">Easy</option>
+            <option class="intensity" value="medium">Medium</option>
+            <option class="intensity" value="hard">Hard</option>
+          </select>
+        </label>
+      </div>
+      <!-- workout length -->
+      <div class="row small-12 medium-8">
+        <label
+          >Workout Length
+          <select>
+            <option class="length" value="15">15 min</option>
+            <option class="length" value="30">30 min</option>
+            <option class="length" value="45">45 min</option>
+          </select>
+        </label>
+      </div>
+      <!-- music selection -->
+      <div class="row small-12 medium-8">
+        <label
+          >Music Genre
+          <select>
+            <option class="music" value="hip-hop">Hip Hop</option>
+            <option class="music" value="country">Country</option>
+            <option class="music" value="pop">Pop</option>
+          </select>
+        </label>
+      </div>
+      <!-- buttons -->
+      <div class="row grid-x small-12 align-center">
+        <button type="button" class="button" id="start">Workout</button>
+        <button type="button" class="button" id="random">Random</button>
+      </div>
+    </form>
+    <!-- footer -->
+    <div class="cell" data-sticky-container>
+      <footer class="sticky row grid-x small-12 align-center align-middle" data-sticky data-stick-to="bottom" >
+        <p>	&#169; GymBro 2020</p>
+      </footer>
+    </div>
     <!-- Javascript -->
     <script src="main.js"></script>
   </body>
