@@ -25,74 +25,65 @@
     <!-- Link to CSS sheet -->
     <link rel="stylesheet" href="main.css" />
   </head>
-  <body>
-    <!-- header -->
+  
+  <body class="grid-x grid-padding">
+    
+    <!--Header-->
     <header class="row grid-x small-12 align-center align-middle">
       <i class="fad fa-dumbbell fa-6x"></i>
     </header>
-      <!-- insert button for returning to main page -->
-
-      <!-- insert show Workout here -->
-
-      <!-- insert music playlist here -->
-
-      <!-- footer -->
-      <footer class="row grid-x small-12 align-center align-middle">
-        <p>	&#169; GymBro 2020</p>
-      </footer>
-    <!-- Javascript -->
-    <!-- Two individually scrollable containers, one for the workout, the other for the songs; span horizontally across the page; or, small and centered; make both -->
-    <div class="grid-y medium-grid-frame">
-      <div class="grid-x grid-padding-x">
-        <div class="cell medium-4 cell-block-y" id="exercises">
-          <h2>Workout List</h2>
-          <ul id="exercise-list">
-            <li>5 push ups</li>
-            <li>3 jumping jacks</li>
-            <li>10 kegels</li>
-            <li>5 push ups</li>
-            <li>3 jumping jacks</li>
-            <li>10 kegels</li>
-            <li>5 push ups</li>
-            <li>3 jumping jacks</li>
-            <li>10 kegels</li>
-            <li>5 push ups</li>
-          </ul>
-        </div>
-      <div class="cell medium-4">
-
-      </div>
-      <div id="songs" class="cell medium-4 cell-block-y">
-        <h2>Song Playlist</h2>
-        <div id="song-playlist">
-          <iframe src="https://open.spotify.com/embed/track/1mea3bSkSGXuIRvnydlB5b" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-          <iframe src="https://open.spotify.com/embed/track/03T4ttRCiLXST6MZjeMwmR" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-          <iframe src="https://open.spotify.com/embed/track/3HWDWyIqWuLsTHECx9DvXF" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-      </div>
+    
+    <!--Button for returning to main page-->
+    <div class="row grid-x grid-padding small-12 medium-8 large-6 align-center align-middle" id="return">
+    <button type="button" class="button" id="return">Go Back</button>
     </div>
-    <div class = "grid-x grid-padding-x">
-    <div class= "cell medium-4">
-        <h2>Workout List</h2>
-          <ul id="exercise-list">
-            <li>5 push ups</li>
-            <li>3 jumping jacks</li>
-            <li>10 kegels</li>
-            <li>5 push ups</li>
-            <li>3 jumping jacks</li>
-            <li>10 kegels</li>
-            <li>5 push ups</li>
-            <li>3 jumping jacks</li>
-            <li>10 kegels</li>
-            <li>5 push ups</li>
-          </ul>
-        </div>
-        <div class="cell medium-4">
-        <h2>Song List</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-      <!-- Javascript -->
+    
+    <!--Table for displaying the workout chosen-->
+    <div class="row grid-x grid-padding small-12 medium-8 large-6 medium-offset-2 large-offset-3 output-box align-center align-middle table-scroll" id="exercise-list">
+      <table>
+        <thead>
+          <tr>
+            <th class="exercise-title">Name of Exercise</th>
+            <th class="exercise-title">Description of Exercise</th>
+            <th class="exercise-title">Number of Reps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><p>Axe Hold</p></td>
+            <td><p>Grab dumbbells and extend arms to side and hold as long as you can.</p></td>
+            <td><p>8</p></td>
+          </tr>
+          <tr>
+            <td><p>Back Squat</p></td>
+            <td><p>Place a barbell in a rack just below shoulder-height. Dip under the bar to put it behind the neck across the top of the back, and grip the bar with the hands wider than shoulder-width apart.</p></td>
+            <td><p>4</p></td>
+          </tr>
+          <tr>
+            <td><p>Barbell Triceps Extension</p></td>
+            <td><p>Position barbell overhead with narrow overhand grip. Lower forearm behind upper arm with elbows remaining overhead. Extend forearm overhead. Lower and repeat.</p></td>
+            <td><p>10</p></td>
+          </tr>
+          <tr>
+            <td><p>Biceps Curl With Cable</p></td>
+            <td><p>Stand around 30 - 40cm away from the cable, the feet are firmly on the floor. Take the bar and lift the weight with a fast movements. Lower the weight as with the dumbbell curls slowly and controlled.</p></td>
+            <td><p>10</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!--Spotify Playlist populates the column here-->
+    <div class="row grid-x grid-padding small-12 medium-8 large-6 large-offset-4 medium-offset-2 align-center align-middle" id="song-playlist">
+      <iframe src="https://open.spotify.com/embed/playlist/4lXLUGtdiDFUbmDSHpt699" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+      
+    <!--Footer-->
+    <footer class="row grid-x small-12 align-center align-middle">
+      <p>	&#169; GymBro 2020</p>
+    </footer>
+
+    <!--Javascript-->
     <script src="main.js"></script>
   </body>
 </html>
