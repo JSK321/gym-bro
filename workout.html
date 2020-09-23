@@ -26,7 +26,58 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <!-- Javascript -->
+    <!-- Two individually scrollable containers, one for the workout, the other for the songs; span horizontally across the page; or, small and centered; make both -->
+    <div class="grid-y medium-grid-frame">
+      <div class="grid-x grid-padding-x">
+        <div class="cell medium-4 cell-block-y" id="exercises">
+          <h2>Workout List</h2>
+          <ul id="exercise-list">
+            <li>5 push ups</li>
+            <li>3 jumping jacks</li>
+            <li>10 kegels</li>
+            <li>5 push ups</li>
+            <li>3 jumping jacks</li>
+            <li>10 kegels</li>
+            <li>5 push ups</li>
+            <li>3 jumping jacks</li>
+            <li>10 kegels</li>
+            <li>5 push ups</li>
+          </ul>
+        </div>
+      <div class="cell medium-4">
+
+      </div>
+      <div id="songs" class="cell medium-4 cell-block-y">
+        <h2>Song Playlist</h2>
+        <div id="song-playlist">
+          <iframe src="https://open.spotify.com/embed/track/1mea3bSkSGXuIRvnydlB5b" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/03T4ttRCiLXST6MZjeMwmR" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/3HWDWyIqWuLsTHECx9DvXF" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class = "grid-x grid-padding-x">
+    <div class= "cell medium-4">
+        <h2>Workout List</h2>
+          <ul id="exercise-list">
+            <li>5 push ups</li>
+            <li>3 jumping jacks</li>
+            <li>10 kegels</li>
+            <li>5 push ups</li>
+            <li>3 jumping jacks</li>
+            <li>10 kegels</li>
+            <li>5 push ups</li>
+            <li>3 jumping jacks</li>
+            <li>10 kegels</li>
+            <li>5 push ups</li>
+          </ul>
+        </div>
+        <div class="cell medium-4">
+        <h2>Song List</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <!-- Javascript -->
     <script src="main.js"></script>
   </body>
 </html>
