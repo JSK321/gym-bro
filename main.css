@@ -1,1 +1,13 @@
 /* main css */
+/* .cell {
+    background-color: lightblue;
+} */
+
+#songs {
+    background-color: green;
+}
+
+#exercises {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: lightblue;
+}
