@@ -81,3 +81,23 @@ table tr:nth-of-type(even),  table tr:nth-of-type(odd){
     color: #ffffff !important;
     background-color:  #191414 !important;
 }
+
+/* Scrollbar customization for only body elements */
+body ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  body ::-webkit-scrollbar-track {
+    background: #191414; 
+  }
+   
+  /* Handle */
+  body ::-webkit-scrollbar-thumb {
+    background: rgb(102, 101, 101); 
+  }
+  
+  /* Handle on hover */
+  body ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
