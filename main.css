@@ -50,3 +50,15 @@ footer {
 /* CSS Styling for the Workout Space */
 
 /* CSS Styling for the Music Space */
+/* .cell {
+    background-color: lightblue;
+} */
+
+#songs {
+    background-color: green;
+}
+
+#exercises {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: lightblue;
+}
