@@ -109,8 +109,8 @@ iframe{
     border-radius: 20px;
 }
  
-/* changing the footer from fixed to sticky at 805px height */
-@media screen and (max-height: 805px) {
+/* changing the footer from fixed to sticky at 1000px height */
+@media screen and (max-height: 1000px) {
 
     footer {
         position: sticky;
