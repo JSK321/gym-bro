@@ -406,6 +406,42 @@ function abs() {
     })
 }
 
+// on page load, check the page
+function checkPage(){
+    // grab the current url
+    var str = $(location).attr("href");
+    // parse the url down to the last section
+    str = str.substring(str.lastIndexOf('/') +1);
+    // if the last section is the workout.html
+    if(str === "workout.html"){
+        // create a new variable to get the page change button
+        var pageVal = "";
+        // if the local storage has something in it
+        if(JSON.parse(localStorage.getItem("pageChange"))){
+            // if the stored data isn't empty
+            if((JSON.parse(localStorage.getItem("pageChange")).length !== 0)){
+                // set the page value to the page change type
+                pageVal = (JSON.parse(localStorage.getItem("pageChange")));
+                // if the user pressed the workout button
+                if(pageVal === "select"){
+                    console.log("select stored, fill this in later");
+                    return;
+                }
+                // if the user pressed the random button
+                if(pageVal === "random"){
+                    arms();
+                    checkSpot();
+                    return;
+                }
+
+            }
+        }
+        // if the user navigated to the workout page or cleared their local storage
+        console.log("navigated randomly");
+        checkSpot();
+    }
+}
+
 // ------------------------------------------------------------------
 // Click Event Listeners
 // ------------------------------------------------------------------
@@ -428,21 +464,28 @@ if (localStorage.getItem("type")) {
     musicGenre = localStorage.getItem("genre");
 }
 
-if (location.href.includes("workout")) {
-    checkSpot();
-    arms();
-}
+// if (location.href.includes("workout")) {
+//     checkSpot();
+//     arms();
+// }
 
 $("#start").click(function() {
     localStorage.setItem("type", $("#type").val());
     localStorage.setItem("intensity", $("#intensity").val()); 
     localStorage.setItem("length", $("#length").val());
     localStorage.setItem("genre", $("#genre").val());
-    location.href = "workout.html";
+    // if the workout button was clicked, store that info and load the next page
+    var buttonInput = JSON.stringify("select");
+    localStorage.setItem("pageChange", buttonInput);
+    $(location).attr("href", "workout.html");
 })
 
 $("#random").click(function() {
-    location.href = "workout.html";
+    // if the random button was clicked, store that info and load the next page
+    var buttonInput = JSON.stringify("random");
+    localStorage.setItem("pageChange", buttonInput);
+    $(location).attr("href", "workout.html");
 })
 
-
+// when the document is loaded check the page
+$(document).ready( function() { checkPage(); });
