@@ -406,6 +406,18 @@ function abs() {
     })
 }
 
+function randomWorkout() {
+    let workout = [
+        arms,
+        legs,
+        abs,
+        chest,
+        back,
+        shoulder
+    ]
+    workout[Math.floor(Math.random() * workout.length)]();
+    
+}
 // on page load, check the page
 function checkPage(){
     // grab the current url
@@ -436,7 +448,7 @@ function checkPage(){
                 }
                 // if the user pressed the random button
                 if(pageVal === "random"){
-                    arms();
+                    randomWorkout();
                     checkSpot();
                     return;
                 }
@@ -461,18 +473,6 @@ function getLocalStorage() {
 // ------------------------------------------------------------------
 // Click Event Listeners
 // ------------------------------------------------------------------
-$('.armsExercise').on('click', function () {
-    arms()
-})
-
-$('.legsExercise').on('click', function () {
-    legs()
-})
-
-$('.absExercise').on('click', function () {
-    abs()
-})
-
 $("#start").click(function() {
     localStorage.setItem("type", $("#type").val());
     localStorage.setItem("intensity", $("#intensity").val()); 
@@ -492,6 +492,7 @@ $("#random").click(function() {
 })
 
 $("#return").click(function() {
+    localStorage.clear();
     $(location).attr("href", "index.html");
 })
 
