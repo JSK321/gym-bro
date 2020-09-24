@@ -7,6 +7,15 @@ var spotifyApi = new SpotifyWebApi();
 var client_id = 'e02d32c1b0bd4912ac276af9821e6f36';
 var client_secret = '7325643c19d54ae281990a8f2eb64d86';
 var encoded = btoa(client_id + ':' + client_secret);
+var workoutType;
+var workoutInt;
+var workoutLen;
+var musicGenre;
+
+console.log(workoutType);
+console.log(workoutInt);
+console.log(workoutLen);
+console.log(musicGenre);
 
 $.ajax({
   url: 'https://accounts.spotify.com/api/token',
@@ -22,12 +31,30 @@ $.ajax({
     console.log(data.access_token);
     spotifyApi.setAccessToken(data.access_token);
     spotifyApi.getPlaylist("1vFqDEkllm3fDKGfHO0FEm").then(function(response) {
-      console.log(response.external_urls.spotify);
+    console.log(response.external_urls.spotify);
       
 
     })
 
-  });
+});
+
+$("#start").click(function() {
+    workoutType = $("#type").val();
+    workoutInt = $("#intensity").val();
+    workoutLen = $("#length").val();
+    musicGenre = $("#genre").val();
+    location.href = "workout.html";
+    setVariables(workoutType, workoutInt, workoutLen, musicGenre);
+})
+
+function setVariables(a, b, c, d) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(d);
+}
+
+
 },{"spotify-web-api-js":2}],2:[function(require,module,exports){
 /* global module */
 'use strict';
