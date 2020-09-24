@@ -902,6 +902,11 @@ function shoulder() {
 }
 
 function randomWorkout() {
+    let intensity = [
+        "easy",
+        "medium",
+        "hard",
+    ]
     let workout = [
         arms,
         legs,
@@ -910,6 +915,7 @@ function randomWorkout() {
         back,
         shoulder
     ]
+    workoutInt = intensity[Math.floor(Math.random() * intensity.length)];
     workout[Math.floor(Math.random() * workout.length)]();
 
 }
@@ -949,26 +955,7 @@ function checkPage() {
                 }
                 // if the user pressed the random button
                 if (pageVal === "random") {
-                //     function randomType(min, max) {
-                //         return Math.random() * (max - min) + min;
-                //     }
-                //     Math.floor(randomType(8, 14));
-                //     Math.floor(randomType(8, 14)).value === workoutType
-                //     if (workoutType === "8") {
-                //         arms();
-                //     } else if (workoutType === "9") {
-                //         legs();
-                //     } else if (workoutType === "10") {
-                //         abs();
-                //     } else if (workoutType === "11") {
-                //         chest();
-                //     } else if (workoutType === "12") {
-                //         back();
-                //     } else if (workoutType === "13") {
-                //         shoulder();
-                //     }
-                // }
-                arms();
+                randomWorkout();
                 checkSpot();
                 return;
                 }
@@ -1005,12 +992,6 @@ $('.legsExercise').on('click', function () {
 $('.absExercise').on('click', function () {
     abs()
 })
-
-
-// if (location.href.includes("workout")) {
-//     checkSpot();
-//     arms();
-// }
 
 $("#start").click(function () {
     localStorage.setItem("type", $("#type").val());
