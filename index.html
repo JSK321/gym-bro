@@ -1,54 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Font_Awesome_5_solid_dumbbell.svg/1279px-Font_Awesome_5_solid_dumbbell.svg.png" type="image/x-icon">
     <title>GymBro</title>
     <!-- Fontawesome Script -->
-    <script
-      src="https://kit.fontawesome.com/c7d28a1474.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/c7d28a1474.js" crossorigin="anonymous"></script>
     <!-- Link to Foundation CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
     <!-- Link to Foundation Javascript -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
     <!-- Link to JQuery -->
-    <script 
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Link to Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <!-- Link to CSS sheet -->
     <link rel="stylesheet" href="main.css" />
-  </head>
-  <body class="grid-x grid-padding">
+</head>
+
+<body class="grid-x grid-padding">
     <!-- header -->
     <header class="row grid-x small-12 align-center align-middle">
-      <h1>Gym&nbsp;</h1> <i class="fad fa-dumbbell fa-4x"></i> <h1>&nbsp;Bro</h1>
+        <h1>Gym&nbsp;</h1> <i class="fad fa-dumbbell fa-4x"></i>
+        <h1>&nbsp;Bro</h1>
     </header>
     <!-- Headline -->
     <div class="grid-x small-12 align-center align-middle">
-      <h3>Choose Your Workout</h3>
+        <h3>Choose Your Workout</h3>
     </div>
     <!-- form -->
-    <form
-      class="row grid-x grid-padding small-12 medium-8 large-6 medium-offset-2 large-offset-3 input-box align-center align-middle"
-    >
-      <!-- type of workout -->
-      <div class="row small-12 medium-8">
-        <label
-          >Type of Workout
+    <form class="row grid-x grid-padding small-12 medium-8 large-6 medium-offset-2 large-offset-3 input-box align-center align-middle">
+        <!-- type of workout -->
+        <div class="row small-12 medium-8">
+            <label>Type of Workout
           <select id="type">
             <option class="type" value="8">Arms</option>
             <option class="type" value="9">Legs</option>
@@ -59,33 +45,30 @@
 
           </select>
         </label>
-      </div>
-      <!-- workout intensity -->
-      <div class="row small-12 medium-8">
-        <label
-          >Workout Intensity
+        </div>
+        <!-- workout intensity -->
+        <div class="row small-12 medium-8">
+            <label>Workout Intensity
           <select id="intensity">
             <option class="intensity" value="easy">Easy</option>
             <option class="intensity" value="medium">Medium</option>
             <option class="intensity" value="hard">Hard</option>
           </select>
         </label>
-      </div>
-      <!-- workout length -->
-      <div class="row small-12 medium-8">
-        <label
-          >Workout Length
+        </div>
+        <!-- workout length -->
+        <div class="row small-12 medium-8">
+            <label>Workout Length
           <select id="length">
             <option class="length" value="15">15 min</option>
             <option class="length" value="30">30 min</option>
             <option class="length" value="45">45 min</option>
           </select>
         </label>
-      </div>
-      <!-- music selection -->
-      <div class="row small-12 medium-8">
-        <label
-          >Music Genre
+        </div>
+        <!-- music selection -->
+        <div class="row small-12 medium-8">
+            <label>Music Genre
           <select id="genre">
             <option class="music" value="hiphop">Hip Hop</option>
             <option class="music" value="workout">Workout</option>
@@ -94,26 +77,26 @@
             <option class="music" value="rock">Rock</option>
           </select>
         </label>
-      </div>
-      <!-- buttons -->
-      <div class="row grid-x small-12 align-center">
-        <button type="button" class="button" id="start">Workout</button>
-        <button type="button" class="button" id="random">Random</button>
-      </div>
+        </div>
+        <!-- buttons -->
+        <div class="row grid-x small-12 align-center">
+            <button type="button" class="button" id="start">Workout</button>
+            <button type="button" class="button" id="random">Random</button>
+        </div>
     </form>
     <!-- footer -->
     <footer class="row grid-x small-12 align-center align-middle">
-      <p>	&#169; GymBro 2020</p>
+        <p> &#169; GymBro 2020</p>
     </footer>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- music js -->
     <script src="music.js"></script>
-    <!-- workout js -->
     <script src="jkscript.js"></script>
 
     <script src="jlmscript.js"></script>
     <!-- Javascript -->
     <script src="main.js"></script>
-  </body>
+</body>
+
 </html>
