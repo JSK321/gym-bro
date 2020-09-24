@@ -433,16 +433,19 @@ if (location.href.includes("workout")) {
     arms();
 }
 
-$("#start").click(function() {
-    localStorage.setItem("type", $("#type").val());
-    localStorage.setItem("intensity", $("#intensity").val()); 
-    localStorage.setItem("length", $("#length").val());
-    localStorage.setItem("genre", $("#genre").val());
-    location.href = "workout.html";
+$("button").click(function() {
+    if ($(this).attr("id") === "start") {
+        localStorage.setItem("type", $("#type").val());
+        localStorage.setItem("intensity", $("#intensity").val()); 
+        localStorage.setItem("length", $("#length").val());
+        localStorage.setItem("genre", $("#genre").val());
+    }
+    if ($(this).attr("id") === "return" ){
+        location.href = "index.html";
+    } else {
+        location.href = "workout.html";
+    }
 })
 
-$("#random").click(function() {
-    location.href = "workout.html";
-})
 
 
