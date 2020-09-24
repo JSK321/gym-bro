@@ -495,10 +495,6 @@ function chest() {
     });
 }
 
-$(".chestExercise").on("click", function() {
-    chest()
-})
-
 function back() {
     var queryURL = "https://wger.de/api/v2/exerciseinfo/?language=2&category=12&equipment=3"
 
@@ -589,9 +585,6 @@ function back() {
     });
 }
 
-$(".backExercise").on("click", function() {
-    back()
-})
 
 function shoulder() {
     var queryURL = "https://wger.de/api/v2/exerciseinfo/?language=2&category=13&equipment=3"
@@ -699,10 +692,6 @@ function shoulder() {
     });
 }
 
-$(".shoulderExercise").on("click", function() {
-    shoulder()
-})
-
 function randomWorkout() {
     let workout = [
         arms,
@@ -788,12 +777,6 @@ $('.absExercise').on('click', function() {
     abs()
 })
 
-if (localStorage.getItem("type")) {
-    workoutType = localStorage.getItem("type");
-    workoutInt = localStorage.getItem("intensity");
-    workoutLen = localStorage.getItem("length");
-    musicGenre = localStorage.getItem("genre");
-}
 
 // if (location.href.includes("workout")) {
 //     checkSpot();
@@ -819,6 +802,7 @@ $("#random").click(function() {
 })
 
 $("#return").click(function() {
+    // if "Go Back" on workout page is clicked, clear local storage, and return to home page
     localStorage.clear();
     $(location).attr("href", "index.html");
 })
