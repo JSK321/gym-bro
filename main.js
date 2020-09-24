@@ -9,19 +9,24 @@ var musicGenre;
 // define genre array
 var genreArray = ["pop", "workout", "kpop", "hiphop", "rock"];
 
+// Workout Intensity Repetitions/Sets
+var repsEasy = "15 Repetitions, 3 Sets Each"
+var repsMed = "25 Repetitions, 4 sets Each"
+var repsHard = "As many as you can!"
+
 // spotify ajax calls
 function checkSpot() {
     $.ajax({
         // call the token url
         url: "https://accounts.spotify.com/api/token",
         // set the authorization headers
-        beforeSend: function(xhr) { xhr.setRequestHeader(`Authorization`, `Basic ZjU1ZmYzZTRhODZlNDVhM2I0ZWRmNmM0Yjc0YzNkMzI6YTY4M2NjMzZiZTZmNDNmODk0Njg0ZDcyN2RkMTkyOTc=`); },
+        beforeSend: function (xhr) { xhr.setRequestHeader(`Authorization`, `Basic ZjU1ZmYzZTRhODZlNDVhM2I0ZWRmNmM0Yjc0YzNkMzI6YTY4M2NjMzZiZTZmNDNmODk0Njg0ZDcyN2RkMTkyOTc=`); },
         // set the data to client_credentials as per the spotify api instructions
         processData: false,
         data: "grant_type=client_credentials",
         json: true,
         type: "POST",
-        success: function(data) {
+        success: function (data) {
             // parse the token from the first ajax call
             var token = `${data.token_type} ${data.access_token}`;
             // grab a random genre from the array
@@ -30,10 +35,10 @@ function checkSpot() {
             $.ajax({
                 url: `https://api.spotify.com/v1/browse/categories/${genreArray[randomGenre]}/playlists`,
                 // set the authorization headers with the token
-                beforeSend: function(xhr) { xhr.setRequestHeader(`Authorization`, `${token}`); },
+                beforeSend: function (xhr) { xhr.setRequestHeader(`Authorization`, `${token}`); },
                 json: true,
                 type: "GET",
-                success: function(data) {
+                success: function (data) {
                     // set the returned data
                     playlistInfo = data.playlists;
                     // pick a random playlist
@@ -43,13 +48,13 @@ function checkSpot() {
                     // populate the music playlist on the page
                     musicPlaylist(uri);
                 },
-                error: function() {
+                error: function () {
                     console.log("cannot get playlist");
                 }
             });
 
         },
-        error: function() {
+        error: function () {
             console.log("Cannot get data");
         }
     });
@@ -87,7 +92,7 @@ function arms() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         // console.log(response)
         //"https://wger.de/api/v2/exerciseinfo/?language=2&equipment=3&category=8"
 
@@ -121,7 +126,13 @@ function arms() {
         $('.axeRow').append($("<td class = 'axe3'>"))
         $('.axe1').html(axeHold)
         $('.axe2').html(axeHoldDESC)
-        $('.axe3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.axe3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.axe3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.axe3').html(repsHard)
+        }
 
         // Bicep Curl with Dumbbell
         $('table').append(armsBody)
@@ -132,7 +143,13 @@ function arms() {
         $('.bcRow').append($("<td class = 'bc3'>"))
         $('.bc1').html(biCurl)
         $('.bc2').html(biCurlDESC)
-        $('.bc3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.bc3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.bc3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.bc3').html(repsHard)
+        }
 
         // Hammercurls
         $('table').append(armsBody)
@@ -143,7 +160,13 @@ function arms() {
         $('.hcRow').append($("<td class = 'hc3'>"))
         $('.hc1').html(hamCurl)
         $('.hc2').html(hamCurlDESC)
-        $('.hc3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.hc3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.hc3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.hc3').html(repsHard)
+        }
 
         // Seated Tricep Press
         $('table').append(armsBody)
@@ -154,7 +177,13 @@ function arms() {
         $('.tpRow').append($("<td class = 'tp3'>"))
         $('.tp1').html(triPress)
         $('.tp2').html(triPressDESC)
-        $('.tp3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.tp3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.tp3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.tp3').html(repsHard)
+        }
 
         // Standing Bicep Curl
         $('table').append(armsBody)
@@ -165,7 +194,13 @@ function arms() {
         $('.sbcRow').append($("<td class = 'sbc3'>"))
         $('.sbc1').html(standBiCurl)
         $('.sbc2').html(standBiCurlDESC)
-        $('.sbc3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.sbc3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.sbc3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.sbc3').html(repsHard)
+        }
 
         // Tricep Dumbbell Kickback
         $('table').append(armsBody)
@@ -175,7 +210,13 @@ function arms() {
         $('.triDKRow').append($("<td class = 'triDK2'>"))
         $('.triDKRow').append($("<td class = 'triDK3'>"))
         $('.triDK1').html(triDumb)
-        $('.triDK3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.triDK3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.triDK3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.triDK3').html(repsHard)
+        }
     })
 }
 
@@ -199,7 +240,7 @@ function legs() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         // console.log(response)
         //"https://wger.de/api/v2/exerciseinfo/?language=2&category=9&limit=30&offset=50"
 
@@ -233,7 +274,13 @@ function legs() {
         $('.dbLWRow').append($("<td class = 'dbLW3'>"))
         $('.dbLW1').html(dbLW)
         $('.dbLW2').html(dbLWD)
-        $('.dbLW3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.dbLW3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.dbLW3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.dbLW3').html(repsHard)
+        }
 
         //Fire Hydrant
         $('table').append(legsBody)
@@ -244,7 +291,13 @@ function legs() {
         $('.fhRow').append($("<td class = 'fh3'>"))
         $('.fh1').html(fh)
         $('.fh2').html(fhD)
-        $('.fh3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.fh3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.fh3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.fh3').html(repsHard)
+        }
 
         // Glute Bridge
         $('table').append(legsBody)
@@ -255,7 +308,13 @@ function legs() {
         $('.gbRow').append($("<td class = 'gb3'>"))
         $('.gb1').html(gb)
         $('.gb2').html(gbD)
-        $('.gb3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.gb3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.gb3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.gb3').html(repsHard)
+        }
 
         // High Knee Jumps
         $('table').append(legsBody)
@@ -266,7 +325,13 @@ function legs() {
         $('.hkjRow').append($("<td class = 'hkj3'>"))
         $('.hkj1').html(hkj)
         $('.hkj2').html(hkjD)
-        $('.hkj3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.hkj3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.hkj3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.hkj3').html(repsHard)
+        }
 
         //High Knee
         $('table').append(legsBody)
@@ -277,7 +342,13 @@ function legs() {
         $('.hkRow').append($("<td class = 'hk3'>"))
         $('.hk1').html(hk)
         $('.hk2').html(hkD)
-        $('.hk3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.hk3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.hk3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.hk3').html(repsHard)
+        }
 
         // Jumping Jacks
         $('table').append(legsBody)
@@ -288,7 +359,13 @@ function legs() {
         $('.jjRow').append($("<td class = 'jj3'>"))
         $('.jj1').html(jj)
         $('.jj2').html(jjD)
-        $('.jj3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.jj3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.jj3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.jj3').html(repsHard)
+        }
     })
 }
 
@@ -312,7 +389,7 @@ function abs() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         // console.log(response)
         // "https://wger.de/api/v2/exerciseinfo/?language=2&category=10&limit=20&offset=30"
 
@@ -346,7 +423,13 @@ function abs() {
         $('.dsbRow').append($("<td class = 'dsb3'>"))
         $('.dsb1').html(dsb)
         $('.dsb2').html(dsbD)
-        $('.dsb3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.dsb3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.dsb3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.dsb3').html(repsHard)
+        }
 
         // Flutter Kicks
         $('table').append(absBody)
@@ -357,7 +440,13 @@ function abs() {
         $('.fkRow').append($("<td class = 'fk3'>"))
         $('.fk1').html(fk)
         $('.fk2').html(fkD)
-        $('.fk3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.fk3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.fk3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.fk3').html(repsHard)
+        }
 
         // Full Sit Outs
         $('table').append(absBody)
@@ -368,7 +457,13 @@ function abs() {
         $('.fsoRow').append($("<td class = 'fso3'>"))
         $('.fso1').html(fk)
         $('.fso2').html(fkD)
-        $('.fso3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.fso3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.fso3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.fso3').html(repsHard)
+        }
 
         // Leg Raises, Lying 
         $('table').append(absBody)
@@ -379,7 +474,13 @@ function abs() {
         $('.lrlRow').append($("<td class = 'lrl3'>"))
         $('.lrl1').html(lrl)
         $('.lrl2').html(lrlD)
-        $('.lrl3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.lrl3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.lrl3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.lrl3').html(repsHard)
+        }
 
         // Lying Widescreen Wipers
         $('table').append(absBody)
@@ -390,7 +491,13 @@ function abs() {
         $('.lwwRow').append($("<td class = 'lww3'>"))
         $('.lww1').html(lww)
         $('.lww2').html(lwwD)
-        $('.lww3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.lww3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.lww3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.lww3').html(repsHard)
+        }
 
         // Plank
         $('table').append(absBody)
@@ -401,7 +508,13 @@ function abs() {
         $('.plkRow').append($("<td class = 'plk3'>"))
         $('.plk1').html(plk)
         $('.plk2').html(plkD)
-        $('.plk3').html(reps)
+        if (workoutInt === 'easy') {
+            $('.plk3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.plk3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.plk3').html(repsHard)
+        }
     })
 }
 
@@ -411,20 +524,20 @@ function chest() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response.results)
 
         var flatBench = response.results[3].name
         var flatBenchDec = response.results[3].description
 
         var flys = response.results[4].name
-            // var flysDesc = response.results[4].description
+        // var flysDesc = response.results[4].description
 
         var oneArmPress = response.results[10].name
         var oneArmPressDesc = response.results[10].description
 
         var pullOver = response.results[11].name
-            // var pullOverDesc = response.results[11].description
+        // var pullOverDesc = response.results[11].description
 
         var pushUp = ("Push Up")
         var pushUpDesc = ("Get down on all fours, placing your hands slightly wider than your shoulders.Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat.")
@@ -441,7 +554,13 @@ function chest() {
         $(".flatRow").append($("<td class = 'bench3'>"))
         $(".bench1").html(flatBench)
         $(".bench2").html(flatBenchDec)
-        $(".bench3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each <br>");
+        if (workoutInt === 'easy') {
+            $('.bench3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.bench3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.bench3').html(repsHard)
+        }
 
 
         // Flys exercise
@@ -454,7 +573,13 @@ function chest() {
         $(".flyRow").append($("<td class = 'flys3'>"))
         $(".flys1").html(flys)
         $(".flys2").html("A fly or flye is a strength training exercise in which the hand and arm move through an arc while the elbow is kept at a constant angle. Flies are used to work the muscles of the upper body. <br> Because these exercises use the arms as levers at their longest possible length, the amount of weight that can be moved is significantly less than equivalent press exercises for the same muscles")
-        $(".flys3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each <br>");
+        if (workoutInt === 'easy') {
+            $('.flys3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.flys3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.flys3').html(repsHard)
+        };
 
         // One Arm dumbbell press
         var chestBody = $("<tbody></tbody>")
@@ -466,7 +591,13 @@ function chest() {
         $(".oneArmRow").append($("<td class = 'oneArmPrs3'>"))
         $(".oneArmPrs1").html(oneArmPress)
         $(".oneArmPrs2").html(oneArmPressDesc)
-        $(".oneArmPrs3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each <br>");
+        if (workoutInt === 'easy') {
+            $('.oneArmPrs3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.oneArmPrs3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.oneArmPrs3').html(repsHard)
+        }
 
 
         // Pull over with Dumbbell
@@ -479,7 +610,13 @@ function chest() {
         $(".pullOverDmblRow").append($("<td class = 'pull3'>"))
         $(".pull1").html(pullOver)
         $(".pull2").html("Lower the dumbbell behind the head <br><br>return to the starting position<br>")
-        $(".pull3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each <br><br>");
+        if (workoutInt === 'easy') {
+            $('.pull3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.pull3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.pull3').html(repsHard)
+        }
 
         // Push Up
         var chestBody = $("<tbody></tbody>")
@@ -491,7 +628,13 @@ function chest() {
         $(".pushUpRow").append($("<td class = 'push3'>"))
         $(".push1").html(pushUp)
         $(".push2").html(pushUpDesc)
-        $(".push3").append("Easy: 10-12 reps, 3 sets each <br> Medium: 10-14 reps, 4 sets each <br> Hard: 14-16 reps, 4 sets each <br>");
+        if (workoutInt === 'easy') {
+            $('.push3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.push3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.push3').html(repsHard)
+        }
     });
 }
 
@@ -501,7 +644,7 @@ function back() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response.results)
 
         var bentOverRows = response.results[0].name
@@ -531,7 +674,13 @@ function back() {
         $(".bentOvrRow").append($("<td class = 'bent3'>"))
         $(".bent1").html(bentOverRows)
         $(".bent2").html(bentOverRowsDec)
-        $(".bent3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.bent3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.bent3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.bent3').html(repsHard)
+        }
 
 
         // Dumbbell Row exercise
@@ -544,7 +693,13 @@ function back() {
         $(".dumbbellRowRow").append($("<td class = 'dumbbell3'>"))
         $(".dumbbell1").html(dumbbellRow)
         $(".dumbbell2").html(dumbbellRowDesc)
-        $(".dumbbell3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.dumbbell3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.dumbbell3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.dumbbell3').html(repsHard)
+        }
 
         // Man Breakers
         var backBody = $("<tbody></tbody>")
@@ -556,7 +711,13 @@ function back() {
         $(".manBreakerRow").append($("<td class = 'breaker3'>"))
         $(".breaker1").html(manBreakers)
         $(".breaker2").html(manBreakersDesc)
-        $(".breaker3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.breaker3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.breaker3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.breaker3').html(repsHard)
+        }
 
 
         // Renegade Row
@@ -569,7 +730,13 @@ function back() {
         $(".renegadeRow").append($("<td class = 'renegade3'>"))
         $(".renegade1").html(renegadeRow)
         $(".renegade2").html(renegadeRowDesc)
-        $(".renegade3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.renegade3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.renegade3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.renegade3').html(repsHard)
+        }
 
         // Side Dumbbell Trunnk Flexion
         var backBody = $("<tbody></tbody>")
@@ -581,7 +748,13 @@ function back() {
         $(".sideDmblRow").append($("<td class = 'side3'>"))
         $(".side1").html(sideDumbbell)
         $(".side2").html(sideDumbbellDesc)
-        $(".side3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.side3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.side3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.side3').html(repsHard)
+        }
     });
 }
 
@@ -592,17 +765,17 @@ function shoulder() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response.results)
 
         var arnoldPress = response.results[0].name
-            // var arnoldPress = response.results[0].description
+        // var arnoldPress = response.results[0].description
 
         var bentHighPulls = response.results[1].name
         var bentHighPullsDesc = response.results[1].description
 
         var lateralRaises = response.results[5].name
-            // var lateralRaisesDesc = response.results[5].description
+        // var lateralRaisesDesc = response.results[5].description
 
         var rearDeltRaises = response.results[8].name
         var rearDeltRaisesDesc = response.results[8].description
@@ -626,7 +799,13 @@ function shoulder() {
         $(".shoulderPressRow").append($("<td class = 'arnold3'>"))
         $(".arnold1").html(arnoldPress)
         $(".arnold2").html("Stand with two dumbbells position in front of shoulders, palms facing body and elbows under wrists.<br> Execution. Initiate movement by bringing elbows out to sides. Continue to raise elbows outward while pressing dumbbells overhead until arms are straight. Lower to front of shoulders in opposite pattern and repeat.")
-        $(".arnold3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.arnold3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.arnold3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.arnold3').html(repsHard)
+        }
 
 
         // Bent High Pulls
@@ -639,7 +818,13 @@ function shoulder() {
         $(".bentHighRow").append($("<td class = 'bentHighPls3'>"))
         $(".bentHighPls1").html(bentHighPulls)
         $(".bentHighPls2").html(bentHighPullsDesc)
-        $(".bentHighPls3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.bentHighPls3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.bentHighPls3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.bentHighPls3').html(repsHard)
+        }
 
         // Lateral Raises
         var shoulderBody = $("<tbody></tbody>")
@@ -651,7 +836,13 @@ function shoulder() {
         $(".lateralRaisesRow").append($("<td class = 'lateral3'>"))
         $(".lateral1").html(lateralRaises)
         $(".lateral2").html("Stand with dumbbells by your sides. Hinge at the hips and bend over until your torso is parallel to the floor, or close to that point, keeping your back straight.<br> Raise the weights out to the sides until your arms are parallel with the ground, then slowly take them back down.")
-        $(".lateral3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.lateral3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.lateral3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.lateral3').html(repsHard)
+        }
 
 
         // Rear Delt Raises
@@ -664,7 +855,13 @@ function shoulder() {
         $(".rearDeltRow").append($("<td class = 'raises3'>"))
         $(".raises1").html(rearDeltRaises)
         $(".raises2").html(rearDeltRaisesDesc)
-        $(".raises3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.raises3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.raises3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.raises3').html(repsHard)
+        }
 
         // Shoulder Fly
         var shoulderBody = $("<tbody></tbody>")
@@ -676,7 +873,13 @@ function shoulder() {
         $(".shoulderFlyRow").append($("<td class = 'shoulderFlys3'>"))
         $(".shoulderFlys1").html(shoulderFly)
         $(".shoulderFlys2").html(shoulderFlyDesc)
-        $(".shoulderFlys3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.shoulderFlys3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.shoulderFlys3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.shoulderFlys3').html(repsHard)
+        }
 
         // Shrugs with Dumbbells
         var shoulderBody = $("<tbody></tbody>")
@@ -688,7 +891,13 @@ function shoulder() {
         $(".shrugDumbbellRow").append($("<td class = 'shrug3'>"))
         $(".shrug1").html(shrugs)
         $(".shrug2").html(shrugsDesc)
-        $(".shrug3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each");
+        if (workoutInt === 'easy') {
+            $('.shrug3').html(repsEasy)
+        } else if (workoutInt === 'medium') {
+            $('.shrug3').html(repsMed)
+        } else if (workoutInt === 'hard') {
+            $('.shrug3').html(repsHard)
+        }
     });
 }
 
@@ -740,18 +949,38 @@ function checkPage() {
                 }
                 // if the user pressed the random button
                 if (pageVal === "random") {
-                    arms();
-                    checkSpot();
-                    return;
+                //     function randomType(min, max) {
+                //         return Math.random() * (max - min) + min;
+                //     }
+                //     Math.floor(randomType(8, 14));
+                //     Math.floor(randomType(8, 14)).value === workoutType
+                //     if (workoutType === "8") {
+                //         arms();
+                //     } else if (workoutType === "9") {
+                //         legs();
+                //     } else if (workoutType === "10") {
+                //         abs();
+                //     } else if (workoutType === "11") {
+                //         chest();
+                //     } else if (workoutType === "12") {
+                //         back();
+                //     } else if (workoutType === "13") {
+                //         shoulder();
+                //     }
+                // }
+                arms();
+                checkSpot();
+                return;
                 }
-
             }
+
         }
-        // if the user navigated to the workout page or cleared their local storage
-        console.log("navigated randomly");
-        checkSpot();
     }
+    // if the user navigated to the workout page or cleared their local storage
+    console.log("navigated randomly");
+    checkSpot();
 }
+
 
 function getLocalStorage() {
     if (localStorage.getItem("type")) {
@@ -765,15 +994,15 @@ function getLocalStorage() {
 // ------------------------------------------------------------------
 // Click Event Listeners
 // ------------------------------------------------------------------
-$('.armsExercise').on('click', function() {
+$('.armsExercise').on('click', function () {
     arms()
 })
 
-$('.legsExercise').on('click', function() {
+$('.legsExercise').on('click', function () {
     legs()
 })
 
-$('.absExercise').on('click', function() {
+$('.absExercise').on('click', function () {
     abs()
 })
 
@@ -783,7 +1012,7 @@ $('.absExercise').on('click', function() {
 //     arms();
 // }
 
-$("#start").click(function() {
+$("#start").click(function () {
     localStorage.setItem("type", $("#type").val());
     localStorage.setItem("intensity", $("#intensity").val());
     localStorage.setItem("length", $("#length").val());
@@ -794,18 +1023,18 @@ $("#start").click(function() {
     $(location).attr("href", "workout.html");
 })
 
-$("#random").click(function() {
+$("#random").click(function () {
     // if the random button was clicked, store that info and load the next page
     var buttonInput = JSON.stringify("random");
     localStorage.setItem("pageChange", buttonInput);
     $(location).attr("href", "workout.html");
 })
 
-$("#return").click(function() {
+$("#return").click(function () {
     // if "Go Back" on workout page is clicked, clear local storage, and return to home page
     localStorage.clear();
     $(location).attr("href", "index.html");
 })
 
 // when the document is loaded check the page
-$(document).ready(function() { checkPage(); });
+$(document).ready(function () { checkPage(); });
