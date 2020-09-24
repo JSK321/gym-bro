@@ -703,9 +703,22 @@ $(".shoulderExercise").on("click", function() {
     shoulder()
 })
 
+function randomWorkout() {
+    let workout = [
+        arms,
+        legs,
+        abs,
+        chest,
+        back,
+        shoulder
+    ]
+    workout[Math.floor(Math.random() * workout.length)]();
+
+}
 // on page load, check the page
 function checkPage() {
     // grab the current url
+    getLocalStorage();
     var str = $(location).attr("href");
     // parse the url down to the last section
     str = str.substring(str.lastIndexOf('/') + 1);
@@ -748,6 +761,15 @@ function checkPage() {
         // if the user navigated to the workout page or cleared their local storage
         console.log("navigated randomly");
         checkSpot();
+    }
+}
+
+function getLocalStorage() {
+    if (localStorage.getItem("type")) {
+        workoutType = localStorage.getItem("type");
+        workoutInt = localStorage.getItem("intensity");
+        workoutLen = localStorage.getItem("length");
+        musicGenre = localStorage.getItem("genre");
     }
 }
 
@@ -794,6 +816,11 @@ $("#random").click(function() {
     var buttonInput = JSON.stringify("random");
     localStorage.setItem("pageChange", buttonInput);
     $(location).attr("href", "workout.html");
+})
+
+$("#return").click(function() {
+    localStorage.clear();
+    $(location).attr("href", "index.html");
 })
 
 // when the document is loaded check the page
