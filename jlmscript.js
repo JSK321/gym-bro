@@ -84,7 +84,7 @@ function chest() {
         $(".pushUpRow").append($("<td class = 'push3'>"))
         $(".push1").html(pushUp)
         $(".push2").html(pushUpDesc)
-        $(".push3").append("Easy: 6-8 reps, 3 sets each <br> Medium: 8-10 reps, 4 sets each <br> Hard: 10-12 reps, 4 sets each <br>");
+        $(".push3").append("Easy: 10-12 reps, 3 sets each <br> Medium: 10-14 reps, 4 sets each <br> Hard: 14-16 reps, 4 sets each <br>");
     });
 }
 
