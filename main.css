@@ -42,6 +42,7 @@ header {
 
 /* CSS Styling for the footer */
 footer {
+    position:fixed;
     bottom: 0;
     height: 100px;
     background-color: #1a1a2e;
@@ -61,6 +62,12 @@ footer {
     border-radius: 20px;
     height: 350px;
     position: relative;
+
+}
+
+table {
+    border-collapse: collapse;
+    border-style: hidden;
 }
 
 /* CSS styling for the box around the song playlist */
@@ -70,34 +77,49 @@ footer {
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 1%;
-    width: 350px;
+    /* width: 320px; */
     height: 400px;
     position: relative;
-    left: 4vw;
+   
 }
 
 /* CSS styling for the individual table elements */
-table tr:nth-of-type(even),  table tr:nth-of-type(odd){
+table tr:nth-of-type(odd) {
     color: #ffffff !important;
-    background-color:  #191414 !important;
+    background-color: #191414 !important;
 }
 
-/* Scrollbar customization for only body elements */
-body ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  body ::-webkit-scrollbar-track {
-    background: #191414; 
-  }
-   
-  /* Handle */
-  body ::-webkit-scrollbar-thumb {
-    background: rgb(102, 101, 101); 
-  }
-  
-  /* Handle on hover */
-  body ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+table tr:nth-of-type(even) {
+    color: #ffffff !important;
+    background-color: #1f1a1a !important;
+}
+
+
+/* scroll bar */
+::-webkit-scrollbar {
+    width: 1em;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #1f1a1a;
+    outline: 1px solid #1f1a1a;
+    border-radius: 20px;
+}
+
+iframe{
+    border-radius: 20px;
+}
+ 
+/* changing the footer from fixed to sticky at 805px height */
+@media screen and (max-height: 805px) {
+
+    footer {
+        position: sticky;
+    }
+
+}
