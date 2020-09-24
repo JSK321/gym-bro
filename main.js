@@ -406,9 +406,22 @@ function abs() {
     })
 }
 
+function randomWorkout() {
+    let workout = [
+        arms,
+        legs,
+        abs,
+        chest,
+        back,
+        shoulder
+    ]
+    workout[Math.floor(Math.random() * workout.length)]();
+    
+}
 // on page load, check the page
 function checkPage(){
     // grab the current url
+    getLocalStorage();
     var str = $(location).attr("href");
     // parse the url down to the last section
     str = str.substring(str.lastIndexOf('/') +1);
@@ -435,7 +448,7 @@ function checkPage(){
                 }
                 // if the user pressed the random button
                 if(pageVal === "random"){
-                    arms();
+                    randomWorkout();
                     checkSpot();
                     return;
                 }
@@ -448,33 +461,18 @@ function checkPage(){
     }
 }
 
+function getLocalStorage() {
+    if (localStorage.getItem("type")) {
+        workoutType = localStorage.getItem("type");
+        workoutInt = localStorage.getItem("intensity");
+        workoutLen = localStorage.getItem("length");
+        musicGenre = localStorage.getItem("genre");
+    }
+}
+
 // ------------------------------------------------------------------
 // Click Event Listeners
 // ------------------------------------------------------------------
-$('.armsExercise').on('click', function () {
-    arms()
-})
-
-$('.legsExercise').on('click', function () {
-    legs()
-})
-
-$('.absExercise').on('click', function () {
-    abs()
-})
-
-if (localStorage.getItem("type")) {
-    workoutType = localStorage.getItem("type");
-    workoutInt = localStorage.getItem("intensity");
-    workoutLen = localStorage.getItem("length");
-    musicGenre = localStorage.getItem("genre");
-}
-
-// if (location.href.includes("workout")) {
-//     checkSpot();
-//     arms();
-// }
-
 $("#start").click(function() {
     localStorage.setItem("type", $("#type").val());
     localStorage.setItem("intensity", $("#intensity").val()); 
@@ -491,6 +489,11 @@ $("#random").click(function() {
     var buttonInput = JSON.stringify("random");
     localStorage.setItem("pageChange", buttonInput);
     $(location).attr("href", "workout.html");
+})
+
+$("#return").click(function() {
+    localStorage.clear();
+    $(location).attr("href", "index.html");
 })
 
 // when the document is loaded check the page
