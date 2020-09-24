@@ -901,13 +901,14 @@ function shoulder() {
     });
 }
 
+//selects a random workout intensity level and a random workout type
 function randomWorkout() {
-    let intensity = [
+    var intensity = [
         "easy",
         "medium",
         "hard",
     ]
-    let workout = [
+    var workout = [
         arms,
         legs,
         abs,
