@@ -405,7 +405,7 @@ function abs() {
         $('.plk3').html(reps)
     })
 }
-
+//selects aand appens a random workout
 function randomWorkout() {
     let workout = [
         arms,
@@ -492,6 +492,7 @@ $("#random").click(function() {
 })
 
 $("#return").click(function() {
+    // if "Go Back" on workout page is clicked, clear local storage, and return to home page
     localStorage.clear();
     $(location).attr("href", "index.html");
 })
