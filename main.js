@@ -969,7 +969,8 @@ function checkPage() {
     checkSpot();
 }
 
-
+// if workout settings and music genre are available in local storage, sets the corresponding
+// global variables to values in local storage
 function getLocalStorage() {
     if (localStorage.getItem("type")) {
         workoutType = localStorage.getItem("type");
