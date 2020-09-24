@@ -425,7 +425,13 @@ function checkPage(){
                 pageVal = (JSON.parse(localStorage.getItem("pageChange")));
                 // if the user pressed the workout button
                 if(pageVal === "select"){
-                    console.log("select stored, fill this in later");
+                    if (workoutType === "8"){
+                        arms();
+                    }else if (workoutType === "9"){
+                        legs();
+                    }else  if (workoutType === "10"){
+                        abs();
+                    }
                     return;
                 }
                 // if the user pressed the random button
