@@ -1,68 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Font_Awesome_5_solid_dumbbell.svg/1279px-Font_Awesome_5_solid_dumbbell.svg.png" type="image/x-icon">
     <title>Workout</title>
-    
+
     <!-- Link to Foundation CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-      crossorigin="anonymous"
-    />
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
+
     <!-- Link to Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <!-- Link to CSS sheet -->
     <link rel="stylesheet" href="main.css" />
 
-   
-  </head>
-  
-  <body class="grid-x grid-padding">
-    
-    <!--Header-->
-    <header class="row grid-x small-12 align-center align-middle">
 
-     <h1>Gym&nbsp;</h1><i class="fad fa-dumbbell fa-4x"></i><h1>&nbsp;Bro</h1>
+</head>
+
+<body class="grid-x grid-padding">
+
+    <!--Header-->
+    <header class="row grid-x grid-padding small-12 align-center align-middle">
+
+        <h1>Gym&nbsp;</h1><i class="fad fa-dumbbell fa-4x"></i>
+        <h1>&nbsp;Bro</h1>
 
     </header>
-    
+
     <!--Button for returning to main page and saving current workout + settings-->
     <div class="row grid-x grid-padding small-12 medium-8 medium-offset-2 align-center align-middle">
 
-      <button type="button" class="button" id="return">Go Back</button>
-      <button type="button" class="button" id="save">Save</button>
+        <button type="button" class="button" id="return">Go Back</button>
+        <button type="button" class="button" id="save">Save</button>
 
     </div>
 
     <!--Table for displaying the workout chosen-->
     <div class="row grid-x grid-padding small-12 medium-8 large-6 medium-offset-2 large-offset-3 output-box align-center align-middle table-scroll" id="exercise-list">
-      <table>
-        <thead>
-          <tr>
-            <th class="exercise-title">Name of Exercise</th>
-            <th class="exercise-title">Description of Exercise</th>
-            <th class="exercise-title">Number of Reps</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-     
-      </table>
+        <table>
+            <thead>
+                <tr>
+                    <th class="exercise-title">Name of Exercise</th>
+                    <th class="exercise-title">Description of Exercise</th>
+                    <th class="exercise-title">Number of Reps</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+
+        </table>
     </div>
-    
+
     <!--Spotify Playlist populates the column here-->
-    <div class="row grid-x grid-padding small-12 medium-6 medium-offset-3 large-6 large-offset-3 align-center align-middle " id="song-playlist">
-      <iframe src="https://open.spotify.com/embed/playlist/4lXLUGtdiDFUbmDSHpt699" width="98%" height="380px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <div class="row grid-x grid-padding small-12 medium-8 medium-offset-2 large-6 large-offset-3 align-center align-middle " id="song-playlist">
+        <iframe src="https://open.spotify.com/embed/playlist/4lXLUGtdiDFUbmDSHpt699" width="98%" height="380px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
-      
+
     <!--Footer-->
-    <footer class="row grid-x small-12 align-center align-middle">
-      <p>	&#169; GymBro 2020</p>
+    <footer class="workout-footer row grid-x small-12 align-center align-middle">
+        <p> &#169; GymBro 2020</p>
     </footer>
 
     <!-- Fontawesome Script -->
@@ -71,14 +68,11 @@
     <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Link to Foundation Javascript -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
 
     <!-- main js -->
     <script src="main.js"></script>
 
-  </body>
+</body>
+
 </html>

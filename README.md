@@ -17,7 +17,7 @@
 
 ### General info
 ​
-GymBro is a browser based workout generator that allows you to pick certain criteria such as legs, arms, chest, etc, to generate a workout. Other selectors include, workout intensity and workout length. In addition to providing you with a great workout we have also provided the user with the option to choose a music playlist to accompany the workout, using Spotify. Users can even save their last workout to LocalStorage and recall it as long keep their browser open! 
+GymBro is a browser based workout generator that allows you to pick certain criteria such as legs, arms, chest, etc, to generate a workout. Other selectors include workout intensity. In addition to providing you with a great workout we have also provided the user with the option to choose a music playlist to accompany the workout, using Spotify. Users can even save their last workout to LocalStorage and recall it as long keep their browser open! 
 
 - Foundation CSS
 - Jquery
