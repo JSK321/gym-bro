@@ -3,7 +3,6 @@
 // global workout variables
 var workoutType;
 var workoutInt;
-var workoutLen;
 
 // Workout Intensity Repetitions/Sets
 var repsEasy = "15 Repetitions, 3 Sets Each"
@@ -194,8 +193,8 @@ function randomWorkout() {
     // set a random intensity
     workoutInt = intensity[Math.floor(Math.random() * intensity.length)];
     // call a random workout
-    
-    getWorkout(workout[Math.floor(Math.random() * workout.length)]);
+    workoutType = workout[Math.floor(Math.random() * workout.length)]
+    getWorkout(workoutType);
 
 }
 // on page load, check the page
@@ -216,21 +215,26 @@ function checkPage() {
                 // set the page value to the page change type
                 pageVal = (JSON.parse(localStorage.getItem("pageChange")));
                 // if the user pressed the workout button
-                if (pageVal === "select") {
+                if (pageVal === "select" || pageVal === "load") {
                     // call the workout based on the user input
                     getWorkout(workoutType);
                     // populate the music playlist
-                    checkSpot();
+                    if (pageVal === "select") {
+                        checkSpot();
+                    } else {
+                        musicPlaylist(localStorage.getItem("playlist"));
+                    }
+                    
                     // end the function
                     return;
                 }
                 // if the user pressed the random button
                 if (pageVal === "random") {
-                randomWorkout();
-                // populate the music playlist
-                checkSpot();
-                // end the function
-                return;
+                    randomWorkout();
+                    // populate the music playlist
+                    checkSpot();
+                    // end the function
+                    return;
                 }
             }
 
@@ -248,7 +252,6 @@ function getLocalStorage() {
     if (localStorage.getItem("type")) {
         workoutType = localStorage.getItem("type");
         workoutInt = localStorage.getItem("intensity");
-        workoutLen = localStorage.getItem("length");
     }
 }
 
@@ -277,10 +280,36 @@ $("#random").click(function () {
 })
 
 $("#return").click(function () {
-    // if "Go Back" on workout page is clicked, clear local storage, and return to home page
+    // if "Go Back" on workout page is clicked, clear local storage except for saved settings, 
+    // and return to home page
+    var settings = localStorage.getItem("saved-settings");
     localStorage.clear();
+    localStorage.setItem("saved-settings", settings);
     $(location).attr("href", "index.html");
 })
+
+$("#save").click(function () {
+    // if "Save" is clicked, save current playlist and workout settings 
+    currentPlaylist = $("iframe").attr("src").substring($("iframe").attr("src").indexOf("playlist/") + 9);
+    var settings = [workoutType, workoutInt, currentPlaylist];
+    localStorage.setItem("saved-settings", JSON.stringify(settings));
+});
+
+$("#load").click(function () {
+    // if "Load" is clicked, loads previous settings if detected and then redirects to workout.html. 
+    // does nothing if no settings are detected
+    if (localStorage.getItem("saved-settings")) {
+        if (JSON.parse(localStorage.getItem("saved-settings")).length !== 0 ) {
+            var settings = JSON.parse(localStorage.getItem("saved-settings"));
+            localStorage.setItem("type", settings[0]);
+            localStorage.setItem("intensity", settings[1]);
+            localStorage.setItem("playlist", settings[2]);
+            var buttonInput = JSON.stringify("load");
+            localStorage.setItem("pageChange", buttonInput);
+            $(location).attr("href", "workout.html");
+        }
+    } 
+});
 
 // when the document is loaded check the page
 $(document).ready(function () { checkPage(); });
