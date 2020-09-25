@@ -1,21 +1,20 @@
 // main js page
-console.log("script linked")
 
+// global workout variables
 var workoutType;
 var workoutInt;
 var workoutLen;
-var musicGenre;
+
+// Workout Intensity Repetitions/Sets
+var repsEasy = "15 Repetitions, 3 Sets Each"
+var repsMed = "25 Repetitions, 4 sets Each"
+var repsHard = "As many as you can!"
 
 // array to store workout indexes
 var workoutArray = [];
 
 // define genre array
 var genreArray = ["pop", "workout", "kpop", "hiphop", "rock"];
-
-// Workout Intensity Repetitions/Sets
-var repsEasy = "15 Repetitions, 3 Sets Each"
-var repsMed = "25 Repetitions, 4 sets Each"
-var repsHard = "As many as you can!"
 
 // spotify ajax calls
 function checkSpot() {
@@ -108,6 +107,7 @@ function musicPlaylist(link) {
     return;
 }
 
+// generate the workout playlist, taking in the url
 function workoutPlaylist(queryUrl){
 
     $.ajax({
@@ -115,190 +115,87 @@ function workoutPlaylist(queryUrl){
         method: "GET"
     }).then(function (response) {
         var workouts = response.results;
+        // clear current workout playlist to avoid issues
         $(`tbody`).empty();
+        // for each workout index, populate a new row in the playlist
         for(var i = 0; i < workoutArray.length; i++){
+            // create the row and 3 data points
             var newRow = $(`<tr>`);
             var newData1 = $(`<td>`);
             var newData2 = $(`<td>`);
             var newData3 = $(`<td>`);
+            // populate the name data point
             newData1.html(workouts[workoutArray[i]].name);
+            // populate the description data point
             newData2.html(workouts[workoutArray[i]].description);
+            // populate the intensity data point based on saved results
             if (workoutInt === 'easy') {
-                newData3.html(repsEasy)
+                newData3.html(repsEasy);
             } else if (workoutInt === 'medium') {
-                newData3.html(repsMed)
+                newData3.html(repsMed);
             } else if (workoutInt === 'hard') {
-                newData3.html(repsHard)
+                newData3.html(repsHard);
             }
+            // add the data points to the row
             newRow.append(newData1);
             newRow.append(newData2);
             newRow.append(newData3);
+            // add the row to the page in the tbody tag
             $(`tbody`).append(newRow);
         }
     });
 }
 
+// based on workout, set url, set the workout indexes, call the playlist generator
 function getWorkout(index){
+    // arms
     if (index === "8") {
-        // arms
         workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&equipment=3&category=8";
         workoutArray = [0, 3, 12, 14, 16, 19];
         workoutPlaylist(workoutUrl);
 
-    } else if (index === "9") {
-        // legs
+    } 
+    // legs
+    else if (index === "9") {
         workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=9&limit=30&offset=50";
         workoutArray = [2, 8, 10, 13, 14, 21];
         workoutPlaylist(workoutUrl);
-    } else if (index === "10") {
+    } 
         // abs
+    else if (index === "10") {
         workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=10&limit=20&offset=30";
         workoutArray = [0, 1, 2, 7, 13, 19];
         workoutPlaylist(workoutUrl);
-    } else if (index === "11") {
-        // chest
-        workoutUrl = "";
-        workoutArray = [];
+    } 
+    // chest
+    else if (index === "11") {
+        workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=11&limit=30";
+        workoutArray = [0, 5 , 7, 12, 23];
         workoutPlaylist(workoutUrl);
-    } else if (index === "12") {
-        // back
+    } 
+    // back
+    else if (index === "12") {
         workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=12&equipment=3";
         workoutArray = [0, 3, 5, 6, 8];
         workoutPlaylist(workoutUrl);
-    } else if (index === "13") {
-        // shoulder
+    } 
+    // shoulder
+    else if (index === "13") {
         workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=13&equipment=3";
         workoutArray = [1, 8, 10, 14];
         workoutPlaylist(workoutUrl);
     }
 }
 
-function chest() {
-    var queryURL = "https://wger.de/api/v2/exerciseinfo/?language=2&category=11&equipment=3"
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response.results)
-
-        var flatBench = response.results[3].name
-        var flatBenchDec = response.results[3].description
-
-        var flys = response.results[4].name
-        // var flysDesc = response.results[4].description
-
-        var oneArmPress = response.results[10].name
-        var oneArmPressDesc = response.results[10].description
-
-        var pullOver = response.results[11].name
-        // var pullOverDesc = response.results[11].description
-
-        var pushUp = ("Push Up")
-        var pushUpDesc = ("Get down on all fours, placing your hands slightly wider than your shoulders.Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat.")
-
-
-
-        // Flat Row exercise
-        var chestBody = $("<tbody></tbody>")
-        $("table").append(chestBody)
-        chestBody.addClass("chestBody")
-        chestBody.append($("<tr class = 'flatRow' >"))
-        $(".flatRow").append($("<td class = 'bench1'>"))
-        $(".flatRow").append($("<td class = 'bench2'>"))
-        $(".flatRow").append($("<td class = 'bench3'>"))
-        $(".bench1").html(flatBench)
-        $(".bench2").html(flatBenchDec)
-        if (workoutInt === 'easy') {
-            $('.bench3').html(repsEasy)
-        } else if (workoutInt === 'medium') {
-            $('.bench3').html(repsMed)
-        } else if (workoutInt === 'hard') {
-            $('.bench3').html(repsHard)
-        }
-
-
-        // Flys exercise
-        var chestBody = $("<tbody></tbody>")
-        $("table").append(chestBody)
-        chestBody.addClass("chestBody")
-        chestBody.append($("<tr class = 'flyRow' >"))
-        $(".flyRow").append($("<td class = 'flys1'>"))
-        $(".flyRow").append($("<td class = 'flys2'>"))
-        $(".flyRow").append($("<td class = 'flys3'>"))
-        $(".flys1").html(flys)
-        $(".flys2").html("A fly or flye is a strength training exercise in which the hand and arm move through an arc while the elbow is kept at a constant angle. Flies are used to work the muscles of the upper body. <br> Because these exercises use the arms as levers at their longest possible length, the amount of weight that can be moved is significantly less than equivalent press exercises for the same muscles")
-        if (workoutInt === 'easy') {
-            $('.flys3').html(repsEasy)
-        } else if (workoutInt === 'medium') {
-            $('.flys3').html(repsMed)
-        } else if (workoutInt === 'hard') {
-            $('.flys3').html(repsHard)
-        };
-
-        // One Arm dumbbell press
-        var chestBody = $("<tbody></tbody>")
-        $("table").append(chestBody)
-        chestBody.addClass("chestBody")
-        chestBody.append($("<tr class = 'oneArmRow' >"))
-        $(".oneArmRow").append($("<td class = 'oneArmPrs1'>"))
-        $(".oneArmRow").append($("<td class = 'oneArmPrs2'>"))
-        $(".oneArmRow").append($("<td class = 'oneArmPrs3'>"))
-        $(".oneArmPrs1").html(oneArmPress)
-        $(".oneArmPrs2").html(oneArmPressDesc)
-        if (workoutInt === 'easy') {
-            $('.oneArmPrs3').html(repsEasy)
-        } else if (workoutInt === 'medium') {
-            $('.oneArmPrs3').html(repsMed)
-        } else if (workoutInt === 'hard') {
-            $('.oneArmPrs3').html(repsHard)
-        }
-
-
-        // Pull over with Dumbbell
-        var chestBody = $("<tbody></tbody>")
-        $("table").append(chestBody)
-        chestBody.addClass("chestBody")
-        chestBody.append($("<tr class = 'pullOverDmblRow' >"))
-        $(".pullOverDmblRow").append($("<td class = 'pull1'>"))
-        $(".pullOverDmblRow").append($("<td class = 'pull2'>"))
-        $(".pullOverDmblRow").append($("<td class = 'pull3'>"))
-        $(".pull1").html(pullOver)
-        $(".pull2").html("Lower the dumbbell behind the head <br><br>return to the starting position<br>")
-        if (workoutInt === 'easy') {
-            $('.pull3').html(repsEasy)
-        } else if (workoutInt === 'medium') {
-            $('.pull3').html(repsMed)
-        } else if (workoutInt === 'hard') {
-            $('.pull3').html(repsHard)
-        }
-
-        // Push Up
-        var chestBody = $("<tbody></tbody>")
-        $("table").append(chestBody)
-        chestBody.addClass("chestBody")
-        chestBody.append($("<tr class = 'pushUpRow' >"))
-        $(".pushUpRow").append($("<td class = 'push1'>"))
-        $(".pushUpRow").append($("<td class = 'push2'>"))
-        $(".pushUpRow").append($("<td class = 'push3'>"))
-        $(".push1").html(pushUp)
-        $(".push2").html(pushUpDesc)
-        if (workoutInt === 'easy') {
-            $('.push3').html(repsEasy)
-        } else if (workoutInt === 'medium') {
-            $('.push3').html(repsMed)
-        } else if (workoutInt === 'hard') {
-            $('.push3').html(repsHard)
-        }
-    });
-}
-
 //selects a random workout intensity level and a random workout type
 function randomWorkout() {
     var intensity = ["easy", "medium","hard"];
     var workout = ["8", "9", "10", "11", "12", "13"];
+    // set a random intensity
     workoutInt = intensity[Math.floor(Math.random() * intensity.length)];
-    getWorkout(workout[Math.floor(Math.random() * workout.length)]());
+    // call a random workout
+    
+    getWorkout(workout[Math.floor(Math.random() * workout.length)]);
 
 }
 // on page load, check the page
@@ -320,6 +217,7 @@ function checkPage() {
                 pageVal = (JSON.parse(localStorage.getItem("pageChange")));
                 // if the user pressed the workout button
                 if (pageVal === "select") {
+                    // call the workout based on the user input
                     getWorkout(workoutType);
                     // populate the music playlist
                     checkSpot();
@@ -351,24 +249,8 @@ function getLocalStorage() {
         workoutType = localStorage.getItem("type");
         workoutInt = localStorage.getItem("intensity");
         workoutLen = localStorage.getItem("length");
-        musicGenre = localStorage.getItem("genre");
     }
 }
-
-// ------------------------------------------------------------------
-// Click Event Listeners
-// ------------------------------------------------------------------
-$('.armsExercise').on('click', function () {
-    arms()
-})
-
-$('.legsExercise').on('click', function () {
-    legs()
-})
-
-$('.absExercise').on('click', function () {
-    abs()
-})
 
 // if the workout button was clicked, store that info and load the next page
 $("#start").click(function () {
