@@ -901,13 +901,14 @@ function shoulder() {
     });
 }
 
+//selects a random workout intensity level and a random workout type
 function randomWorkout() {
-    let intensity = [
+    var intensity = [
         "easy",
         "medium",
         "hard",
     ]
-    let workout = [
+    var workout = [
         arms,
         legs,
         abs,
@@ -968,7 +969,8 @@ function checkPage() {
     checkSpot();
 }
 
-
+// if workout settings and music genre are available in local storage, sets the corresponding
+// global variables to values in local storage
 function getLocalStorage() {
     if (localStorage.getItem("type")) {
         workoutType = localStorage.getItem("type");
