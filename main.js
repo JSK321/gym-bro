@@ -160,7 +160,7 @@ function getWorkout(index){
         workoutArray = [2, 8, 10, 13, 14, 21];
         workoutPlaylist(workoutUrl);
     } 
-        // abs
+    // abs
     else if (index === "10") {
         workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=10&limit=20&offset=30";
         workoutArray = [0, 1, 2, 7, 13, 19];
