@@ -180,8 +180,8 @@ function getWorkout(index){
     } 
     // shoulder
     else if (index === "13") {
-        workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=13&equipment=3";
-        workoutArray = [1, 8, 10, 14];
+        workoutUrl = "https://wger.de/api/v2/exerciseinfo/?language=2&category=13&limit=35";
+        workoutArray = [2, 3, 10, 31, 34];
         workoutPlaylist(workoutUrl);
     }
 }
