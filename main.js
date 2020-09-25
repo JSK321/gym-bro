@@ -271,7 +271,7 @@ function legs() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
+        // console.log(response)
         //"https://wger.de/api/v2/exerciseinfo/?language=2&category=9&limit=30&offset=50"
 
         // Leg Exercises
@@ -958,18 +958,24 @@ function checkPage() {
                 pageVal = (JSON.parse(localStorage.getItem("pageChange")));
                 // if the user pressed the workout button
                 if (pageVal === "select") {
-                    if (workoutType === "8") {
-                        arms();
-                    } else if (workoutType === "9") {
-                        legs();
-                    } else if (workoutType === "10") {
-                        abs();
-                    } else if (workoutType === "11") {
-                        chest();
-                    } else if (workoutType === "12") {
-                        back();
-                    } else if (workoutType === "13") {
-                        shoulder();
+                    switch (workoutType) {
+                        case "8":
+                            arms();
+                            break;
+                        case "9":
+                            legs();
+                            break;
+                        case "10":
+                            abs();
+                            break;
+                        case "11":
+                            chest();
+                            break;
+                        case "12":
+                            back();
+                            break;
+                        case "13":
+                            shoulder();
                     }
                     // populate the music playlist
                     checkSpot();
