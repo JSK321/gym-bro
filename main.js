@@ -29,8 +29,8 @@ function checkSpot() {
         success: function (data) {
             // parse the token from the first ajax call
             var token = `${data.token_type} ${data.access_token}`;
-            // grab a random genre from the array
-            var randomGenre = Math.floor(Math.random() * genreArray.length);
+            // grab a stored or random genre from the array
+            var randomGenre = getGenre();
             // get a random playlist in the selected genre
             $.ajax({
                 url: `https://api.spotify.com/v1/browse/categories/${genreArray[randomGenre]}/playlists`,
@@ -47,17 +47,43 @@ function checkSpot() {
                     var uri = playlistInfo.items[randomPlaylist].uri.substring(17);
                     // populate the music playlist on the page
                     musicPlaylist(uri);
+                    return;
                 },
                 error: function () {
                     console.log("cannot get playlist");
+                    return;
                 }
             });
 
         },
         error: function () {
             console.log("Cannot get data");
+            return;
         }
     });
+}
+
+// get a stored or random genre index
+function getGenre(){
+    //Math.floor(Math.random() * genreArray.length);
+    // if the local storage has something in it
+    var genreStr = "";
+    if (JSON.parse(localStorage.getItem("genre"))) {
+        // if the stored data isn't empty
+        if ((JSON.parse(localStorage.getItem("genre")).length !== 0)) {
+            // set the genre value to the page change type
+            genreStr = (JSON.parse(localStorage.getItem("genre")));
+        }
+    }
+    // if there wasn't a stored genre, get a random one
+    if(genreStr === "")
+    {
+        // return a random index
+        return (Math.floor(Math.random() * genreArray.length));
+    }
+    // return the index of the stored genre
+    var genreNumber = genreArray.indexOf(genreStr);
+    return (genreNumber);
 }
 
 // create music playlist
@@ -67,6 +93,7 @@ function musicPlaylist(link) {
     var newFrame = $("<iframe>");
     // set the src to the embed code with the playlist id
     newFrame.attr("src", `https://open.spotify.com/embed/playlist/${link}`);
+    // set the rest of the iframe attributes
     newFrame.attr("width", "98%");
     newFrame.attr("height", "380");
     newFrame.attr("frameborder", "0");
@@ -74,6 +101,8 @@ function musicPlaylist(link) {
     newFrame.attr("allow", "encrypted-media");
     // put the embed on the page
     $("#song-playlist").append(newFrame);
+    // end the function
+    return;
 }
 
 function arms() {
@@ -903,19 +932,8 @@ function shoulder() {
 
 //selects a random workout intensity level and a random workout type
 function randomWorkout() {
-    var intensity = [
-        "easy",
-        "medium",
-        "hard",
-    ]
-    var workout = [
-        arms,
-        legs,
-        abs,
-        chest,
-        back,
-        shoulder
-    ]
+    var intensity = ["easy", "medium","hard"];
+    var workout = [arms, legs, abs, chest, back, shoulder];
     workoutInt = intensity[Math.floor(Math.random() * intensity.length)];
     workout[Math.floor(Math.random() * workout.length)]();
 
@@ -952,12 +970,17 @@ function checkPage() {
                     } else if (workoutType === "13") {
                         shoulder();
                     }
+                    // populate the music playlist
+                    checkSpot();
+                    // end the function
                     return;
                 }
                 // if the user pressed the random button
                 if (pageVal === "random") {
                 randomWorkout();
+                // populate the music playlist
                 checkSpot();
+                // end the function
                 return;
                 }
             }
@@ -966,6 +989,7 @@ function checkPage() {
     }
     // if the user navigated to the workout page or cleared their local storage
     console.log("navigated randomly");
+    randomWorkout();
     checkSpot();
 }
 
@@ -995,19 +1019,25 @@ $('.absExercise').on('click', function () {
     abs()
 })
 
+// if the workout button was clicked, store that info and load the next page
 $("#start").click(function () {
     localStorage.setItem("type", $("#type").val());
     localStorage.setItem("intensity", $("#intensity").val());
     localStorage.setItem("length", $("#length").val());
     localStorage.setItem("genre", $("#genre").val());
-    // if the workout button was clicked, store that info and load the next page
+    // store the pageChange variable to local storage as a string
     var buttonInput = JSON.stringify("select");
     localStorage.setItem("pageChange", buttonInput);
+    // store the selected genre to local storage as a string
+    var genreSelected = JSON.stringify($("#genre").val());
+    localStorage.setItem("genre", genreSelected);
+    // change to the workout page
     $(location).attr("href", "workout.html");
 })
 
-$("#random").click(function () {
     // if the random button was clicked, store that info and load the next page
+$("#random").click(function () {
+    // store the pageChange variable to local storage as a string
     var buttonInput = JSON.stringify("random");
     localStorage.setItem("pageChange", buttonInput);
     $(location).attr("href", "workout.html");
