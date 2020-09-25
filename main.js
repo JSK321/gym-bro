@@ -271,7 +271,7 @@ function legs() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // console.log(response)
+        console.log(response)
         //"https://wger.de/api/v2/exerciseinfo/?language=2&category=9&limit=30&offset=50"
 
         // Leg Exercises
