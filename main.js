@@ -239,6 +239,7 @@ function arms() {
         $('.triDKRow').append($("<td class = 'triDK2'>"))
         $('.triDKRow').append($("<td class = 'triDK3'>"))
         $('.triDK1').html(triDumb)
+        $('.triDK2').html(triDumbDESC)
         if (workoutInt === 'easy') {
             $('.triDK3').html(repsEasy)
         } else if (workoutInt === 'medium') {
