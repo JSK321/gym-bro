@@ -52,10 +52,10 @@ footer {
     color: #e94560;
 }
 
-/* CSS styling for the button */
+/* CSS styling for the button section */
 #return {
-    padding-bottom: 1%;
-    padding-top: 1%;
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
 
 /* CSS styling for the box around the workout table */
