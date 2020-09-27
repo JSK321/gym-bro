@@ -15,6 +15,7 @@
 </head>
 
 <body class="grid-x grid-padding">
+
     <!-- header -->
     <header class="row grid-x small-12 align-center align-middle">
 
@@ -60,6 +61,7 @@
             <option class="music" value="pop">Pop</option>
             <option class="music" value="kpop">K Pop</option>
             <option class="music" value="rock">Rock</option>
+            <option value = "playlist" hidden>Playlist selected</option>
           </select>
         </label>
         </div>
@@ -67,9 +69,57 @@
         <div class="row grid-x small-12 align-center">
             <button type="button" class="button" id="start">Workout</button>
             <button type="button" class="button" id="random">Random</button>
-            <button type="button" class="button" id="load">Load</button>
+            <button type="button" class="button" data-open="load-modal">Load</button>
         </div>
+
+        <div class="reveal" id="load-modal" data-reveal>
+          <div class="row">
+            <h2>Saved Playlists</h2>
+             
+          </div>
+          <div class="row grid-x">
+            <div class="columns small-12 large-6 large-offset-3">
+              <select id ="saved-playlists">
+                <option value="" selected>&nbsp;</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <h2>Saved Workouts</h2>
+          </div>
+          <div class="row grid-x">
+            <div class="columns small-12 large-6 large-offset-3">
+              <select id ="saved-workouts">
+                <option value="" selected>&nbsp;</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <h2>Saved Playlists + Workouts</h2>
+          </div>
+          <div class="row grid-x">
+            <div class="columns small-12 large-6 large-offset-3">
+              <select id ="saved-combos">
+                <option value="" selected>&nbsp;</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <button type="button" class="button" id="load" data-close disabled>Load</button>
+          </div>
+          <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
     </form>
+
+    <div class="snackbar" id="snackbar-playlist-load">Playlist loaded</div>
+
+    <div class="snackbar" id="snackbar-workout-load">Workout loaded</div>
+
+    <div class="snackbar" id="snackbar-combo-load">Playlist and workout loaded</div>
+
     <!-- footer -->
     <footer class="home-footer row grid-x small-12 align-center align-middle">
         <p> &#169; GymBro 2020</p>
