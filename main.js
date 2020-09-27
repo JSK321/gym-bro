@@ -1,5 +1,8 @@
 // main js page
 
+// saved settings
+var savedSettings;
+
 // global workout variables
 var workoutType;
 var workoutInt;
@@ -215,14 +218,14 @@ function checkPage() {
                 // set the page value to the page change type
                 pageVal = (JSON.parse(localStorage.getItem("pageChange")));
                 // if the user pressed the workout button
-                if (pageVal === "select" || pageVal === "load") {
+                if (pageVal === "select") {
                     // call the workout based on the user input
                     getWorkout(workoutType);
                     // populate the music playlist
-                    if (pageVal === "select") {
-                        checkSpot();
-                    } else {
+                    if (localStorage.getItem("playlist")) {
                         musicPlaylist(localStorage.getItem("playlist"));
+                    } else if (pageVal === "select") {
+                        checkSpot();
                     }
                     
                     // end the function
@@ -239,6 +242,13 @@ function checkPage() {
             }
 
         }
+    } else if (str === "index.html") {
+        clearLocal();
+        if (savedSettings) {
+            for (var index = 0; index < savedSettings.length; index++) {
+                $("#saved-" + savedSettings[index].type + "s").append($("<option>").val(savedSettings[index].name).text(savedSettings[index].name));
+            }
+        }
     }
     // if the user navigated to the workout page or cleared their local storage
     console.log("navigated randomly");
@@ -246,20 +256,31 @@ function checkPage() {
     checkSpot();
 }
 
-// if workout settings and music genre are available in local storage, sets the corresponding
-// global variables to values in local storage
+// if workout settings and/or previous saved settings  are available in local storage, 
+// sets the corresponding global variables to values in local storage.
 function getLocalStorage() {
     if (localStorage.getItem("type")) {
         workoutType = localStorage.getItem("type");
         workoutInt = localStorage.getItem("intensity");
     }
+    // checks to make sure saved-settings is an array
+    if (localStorage.getItem("saved-settings")) {
+        savedSettings = JSON.parse(localStorage.getItem("saved-settings"));
+        return;
+    }
+    savedSettings = [];
+}
+
+function clearLocal() {
+    var settings = localStorage.getItem("saved-settings");
+    localStorage.clear();
+    localStorage.setItem("saved-settings", settings);
 }
 
 // if the workout button was clicked, store that info and load the next page
 $("#start").click(function () {
     localStorage.setItem("type", $("#type").val());
     localStorage.setItem("intensity", $("#intensity").val());
-    localStorage.setItem("length", $("#length").val());
     localStorage.setItem("genre", $("#genre").val());
     // store the pageChange variable to local storage as a string
     var buttonInput = JSON.stringify("select");
@@ -282,34 +303,160 @@ $("#random").click(function () {
 $("#return").click(function () {
     // if "Go Back" on workout page is clicked, clear local storage except for saved settings, 
     // and return to home page
-    var settings = localStorage.getItem("saved-settings");
-    localStorage.clear();
-    localStorage.setItem("saved-settings", settings);
+    clearLocal();
     $(location).attr("href", "index.html");
 })
 
-$("#save").click(function () {
-    // if "Save" is clicked, save current playlist and workout settings 
-    currentPlaylist = $("iframe").attr("src").substring($("iframe").attr("src").indexOf("playlist/") + 9);
-    var settings = [workoutType, workoutInt, currentPlaylist];
-    localStorage.setItem("saved-settings", JSON.stringify(settings));
+$(".reveal .save-button").click(function () {
+    var currentSettings = {
+        name : $("#name").val()
+    }  
+
+    var id = $(this).attr("id")
+    currentSettings.type = id.substring(id.indexOf("-") + 1);
+
+    if (currentSettings.type !== "workout") {
+        currentSettings.playlist = $("iframe").attr("src").substring($("iframe").attr("src").indexOf("playlist/") + 9);
+    }
+
+    if (currentSettings.type !== "playlist") {
+        currentSettings.workoutType = workoutType;
+        currentSettings.workoutInt = workoutInt;
+    }
+
+    savedSettings.unshift(currentSettings);
+    localStorage.setItem("saved-settings", JSON.stringify(savedSettings));
+    $("#snackbar-" + currentSettings.type).addClass("snackbar-show");
+    setTimeout(function () { 
+        $("#snackbar-" + currentSettings.type).removeClass("snackbar-show") 
+    }, 2000);
+    $("#name").val("");
 });
 
 $("#load").click(function () {
-    // if "Load" is clicked, loads previous settings if detected and then redirects to workout.html. 
-    // does nothing if no settings are detected
-    if (localStorage.getItem("saved-settings")) {
-        if (JSON.parse(localStorage.getItem("saved-settings")).length !== 0 ) {
-            var settings = JSON.parse(localStorage.getItem("saved-settings"));
-            localStorage.setItem("type", settings[0]);
-            localStorage.setItem("intensity", settings[1]);
-            localStorage.setItem("playlist", settings[2]);
-            var buttonInput = JSON.stringify("load");
-            localStorage.setItem("pageChange", buttonInput);
-            $(location).attr("href", "workout.html");
+    var snack;
+    if (!$("#saved-combos").prop("disabled")) {
+        for (var index = 0; index < savedSettings.length; index++) {
+            if (savedSettings[index].name === $("#saved-combos").val()) {
+                $("#type").val(savedSettings[index].workoutType);
+                $("#intensity").val(savedSettings[index].workoutInt);
+                $("#genre").val("playlist");
+                localStorage.setItem("playlist", savedSettings[index].playlist);
+                snack = "combo-load";
+                break;
+            }
         }
-    } 
+    } else {
+        if ($("#saved-playlists").val() !== "") {
+            for (var index = 0; index < savedSettings.length; index++) {
+                if (savedSettings[index].name === $("#saved-playlists").val()) {
+                    $("#genre").val("playlist");
+                    localStorage.setItem("playlist", savedSettings[index].playlist);
+                    snack = "playlist-load";
+                    break;
+                }
+            }
+        }
+        if ($("#saved-workouts").val() !== "") {
+            for (var index = 0; index < savedSettings.length; index++) {
+                if (savedSettings[index].name === $("#saved-workouts").val()) {
+                    $("#type").val(savedSettings[index].workoutType);
+                    $("#intensity").val(savedSettings[index].workoutInt);
+                    if (snack === "workout-load") {
+                        snack = "combo-load";
+                    } else {
+                        snack = "workout-load";
+                    }
+                    break;
+                }
+            }
+        }  
+    }
+    $("#saved-playlists").val("");
+    $("#saved-workouts").val("");
+    $("#saved-combos").val("");
+    $("#snackbar-" + snack).addClass("snackbar-show");
+    setTimeout(function () { 
+        $("#snackbar-" + snack).removeClass("snackbar-show") 
+    }, 2000);
+});
+
+$("#name").keyup(function () {
+    if ($(this).val().trim().length > 0) {
+        $("#save-playlist").prop("disabled", false);
+        $("#save-workout").prop("disabled", false);
+        $("#save-combo").prop("disabled", false);
+        $("#error-text").empty();
+    }
+    for (var index = 0; index < savedSettings.length; index++) {
+        if (savedSettings[index].name === $(this).val()) {
+            $("#save-playlist").prop("disabled", true);
+            $("#save-workout").prop("disabled", true);
+            $("#save-combo").prop("disabled", true);
+            $("#error-text").text("Setting name already exists");
+            return;
+        } else if ($(this).val().trim().length > 0) {
+            $("#save-playlist").prop("disabled", false);
+            $("#save-workout").prop("disabled", false);
+            $("#save-combo").prop("disabled", false);
+            $("#error-text").empty();
+        }
+    }
+});
+
+$("#genre").change(function () {
+    if ($(this).val() !== "playlist") {
+        localStorage.removeItem("playlist");
+    }
+})
+
+$("#load-modal select").change(function () {
+    if ($("#saved-playlists").val() !== "" || $("#saved-workouts").val() !== "" || $("#saved-combos").val() !== "") {
+        $("#load").prop("disabled", false);
+    } else {
+        $("#load").prop("disabled", true);
+    }
+    if ($("#saved-playlists").val() !== "" || $("#saved-workouts").val() !== "") {
+        $("#saved-combos").prop("disabled", true);
+    } else {
+        $("#saved-combos").prop("disabled", false);
+    }
+    if ($("#saved-combos").val() !== "") {
+        $("#saved-playlists").prop("disabled", true);
+        $("#saved-workouts").prop("disabled", true);
+    } else {
+        $("#saved-playlists").prop("disabled", false);
+        $("#saved-workouts").prop("disabled", false);
+    }
+});
+
+$(".delete").click(function () {
+    var adj = "saved" + $(this).attr("id").substring($(this).attr("id").indexOf("-")) + "s";
+    console.log($("#" + adj).val())
+    for (var index = 0; index < savedSettings.length; index++) {
+        if (savedSettings[index].name === $("#" + adj).val()) {
+            $("option[value='" + $("#" + adj).val() +"'").remove();
+            savedSettings.splice(index, 1);
+            localStorage.setItem("saved-settings", JSON.stringify(savedSettings));
+            var id = $(this).attr("id");
+            $("#snackbar-" + id).addClass("snackbar-show");
+            setTimeout(function () { 
+                $("#snackbar-" + id).removeClass("snackbar-show") 
+            }, 2000);
+            $("#" + adj).val("");
+            if ($("#saved-playlists").val() === "" && $("#saved-workouts").val() === "") {
+                $("#saved-combos").prop("disabled", false);
+            }
+            break;
+        }
+    }
 });
 
 // when the document is loaded check the page
-$(document).ready(function () { checkPage(); });
+$(document).ready(
+    function () { 
+        // initialize foundation;
+        $(document).foundation();
+        checkPage(); 
+});
+
