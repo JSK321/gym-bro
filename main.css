@@ -132,8 +132,18 @@
 
     .snackbar-show {
         visibility: visible;
-        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
+        animation: fadein 0.5s, fadeout 0.5s 1.5s;
+    }
+
+    .fa-trash-alt {
+        color: #e94560;
+        font-size: 1.5em
+    }
+    
+    .reveal .delete {
+        margin-top: 10px;
+        margin-left: 10px;
     }
     
     #song-playlist {

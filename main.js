@@ -430,6 +430,28 @@ $("#load-modal select").change(function () {
     }
 });
 
+$(".delete").click(function () {
+    var adj = "saved" + $(this).attr("id").substring($(this).attr("id").indexOf("-")) + "s";
+    console.log($("#" + adj).val())
+    for (var index = 0; index < savedSettings.length; index++) {
+        if (savedSettings[index].name === $("#" + adj).val()) {
+            $("option[value='" + $("#" + adj).val() +"'").remove();
+            savedSettings.splice(index, 1);
+            localStorage.setItem("saved-settings", JSON.stringify(savedSettings));
+            var id = $(this).attr("id");
+            $("#snackbar-" + id).addClass("snackbar-show");
+            setTimeout(function () { 
+                $("#snackbar-" + id).removeClass("snackbar-show") 
+            }, 2000);
+            $("#" + adj).val("");
+            if ($("#saved-playlists").val() === "" && $("#saved-workouts").val() === "") {
+                $("#saved-combos").prop("disabled", false);
+            }
+            break;
+        }
+    }
+});
+
 // when the document is loaded check the page
 $(document).ready(
     function () { 
