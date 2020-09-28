@@ -32,7 +32,7 @@
         <!-- type of workout -->
         <div class="row small-12 medium-8">
             <label>Type of Workout
-          <select id="type">
+          <select id="type" class="workout">
             <option class="type" value="8">Arms</option>
             <option class="type" value="9">Legs</option>
             <option class="type" value="10">Abs</option>
@@ -45,7 +45,7 @@
         <!-- workout intensity -->
         <div class="row small-12 medium-8">
             <label>Workout Intensity
-          <select id="intensity">
+          <select id="intensity" class="workout">
             <option class="intensity" value="easy">Easy</option>
             <option class="intensity" value="medium">Medium</option>
             <option class="intensity" value="hard">Hard</option>
@@ -67,16 +67,18 @@
         </div>
         <!-- buttons -->
         <div class="row grid-x small-12 align-center">
-            <button type="button" class="button" id="start">Workout</button>
-            <button type="button" class="button" id="random">Random</button>
-            <button type="button" class="button" data-open="load-modal">Load</button>
+            <button type="button" class="button left" id="start">Workout</button>
+            <button type="button" class="button center" id="random">Random</button>
+            <button type="button" class="button center" data-open="load-modal">Load</button>
+            <button type="button" class="button right" id="clear" disabled>Clear</button>
         </div>
 
         <div class="reveal" id="load-modal" data-reveal>
           <div class="row">
             <h2>Saved Playlists</h2>
-             
+            
           </div>
+          <div class="row note-div"><p class ="note">Note: if a setting is loaded, clicking "Random" will randomize the unloaded setting(s)</p></div>
           <div class="row grid-x">
             <div class="columns small-10 large-6 small-offset-1 large-offset-3">
               <select id ="saved-playlists">
@@ -133,7 +135,7 @@
 
     <div class="snackbar" id="snackbar-workout-load">Workout loaded</div>
 
-    <div class="snackbar" id="snackbar-combo-load">Playlist and workout loaded</div>
+    <div class="snackbar" id="snackbar-clear">Settings cleared</div>
 
     <div class="snackbar" id="snackbar-delete-playlist">Saved playlist deleted</div>
 
