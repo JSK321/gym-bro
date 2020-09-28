@@ -362,9 +362,6 @@ $("#load").click(function () {
                     $("#genre").val("playlist");
                     localStorage.setItem("playlist", savedSettings[index].playlist);
                     snack = "playlist-load";
-                    if (localStorage.getItem("type")) {
-                        snack = "combo-load";
-                    }
                     break;
                 }
             }
@@ -376,7 +373,7 @@ $("#load").click(function () {
                     $("#intensity").val(savedSettings[index].workoutInt);
                     localStorage.setItem("type", savedSettings[index].workoutType);
                     localStorage.setItem("intensity", savedSettings[index].workoutInt);
-                    if (snack === "playlist-load" || localStorage.getItem("playlist")) {
+                    if (snack === "playlist-load") {
                         snack = "combo-load";
                     } else {
                         snack = "workout-load";
@@ -431,8 +428,24 @@ $("#name").keyup(function () {
 $("#genre").change(function () {
     if ($(this).val() !== "playlist") {
         localStorage.removeItem("playlist");
+        if (!localStorage.getItem("type")) {
+            $("#clear").prop("disabled", true);
+        }
     }
 })
+
+$(".workout").change(function () {
+    var playlist;
+    if (localStorage.getItem("type")) {
+        if (localStorage.getItem("playlist")) {
+            playlist = localStorage.getItem("playlist");
+        }
+        clearLocal();
+    }
+    if (playlist) {
+        localStorage.setItem("playlist", playlist);
+    }
+});
 
 $("#load-modal select").change(function () {
     if ($("#saved-playlists").val() !== "" || $("#saved-workouts").val() !== "" || $("#saved-combos").val() !== "") {

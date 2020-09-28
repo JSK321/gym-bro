@@ -19,6 +19,13 @@
     }
     /* CSS Styling for the labels */
     
+    .note {
+        font-size: 0.8rem;
+    }
+
+    .note-div {
+        margin: 0;
+    }
     label {
         color: #fefefe;
     }
