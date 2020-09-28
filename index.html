@@ -67,9 +67,10 @@
         </div>
         <!-- buttons -->
         <div class="row grid-x small-12 align-center">
-            <button type="button" class="button" id="start">Workout</button>
-            <button type="button" class="button" id="random">Random</button>
-            <button type="button" class="button" data-open="load-modal">Load</button>
+            <button type="button" class="button left" id="start">Workout</button>
+            <button type="button" class="button center" id="random">Random</button>
+            <button type="button" class="button center" data-open="load-modal">Load</button>
+            <button type="button" class="button right" id="clear" disabled>Clear</button>
         </div>
 
         <div class="reveal" id="load-modal" data-reveal>
@@ -133,7 +134,7 @@
 
     <div class="snackbar" id="snackbar-workout-load">Workout loaded</div>
 
-    <div class="snackbar" id="snackbar-combo-load">Playlist and workout loaded</div>
+    <div class="snackbar" id="snackbar-clear">Settings cleared</div>
 
     <div class="snackbar" id="snackbar-delete-playlist">Saved playlist deleted</div>
 

@@ -202,7 +202,6 @@ function randomWorkout() {
 }
 // on page load, check the page
 function checkPage() {
-    console.log("ᕦ(ò_óˇ)");
     // grab the current url
     getLocalStorage();
     var str = $(location).attr("href");
@@ -234,9 +233,17 @@ function checkPage() {
                 }
                 // if the user pressed the random button
                 if (pageVal === "random") {
-                    randomWorkout();
-                    // populate the music playlist
-                    checkSpot();
+                    if (localStorage.getItem("type")) {
+                        getWorkout(workoutType);
+                    } else {
+                        randomWorkout();
+                    }
+                    if (localStorage.getItem("playlist")) {
+                        musicPlaylist(localStorage.getItem("playlist"));
+                    } else {
+                        // populate the music playlist
+                        checkSpot();
+                    }
                     // end the function
                     return;
                 }
@@ -252,7 +259,6 @@ function checkPage() {
         }
     }
     // if the user navigated to the workout page or cleared their local storage
-    console.log("navigated randomly");
     randomWorkout();
     checkSpot();
 }
@@ -341,6 +347,8 @@ $("#load").click(function () {
             if (savedSettings[index].name === $("#saved-combos").val()) {
                 $("#type").val(savedSettings[index].workoutType);
                 $("#intensity").val(savedSettings[index].workoutInt);
+                localStorage.setItem("type", savedSettings[index].workoutType);
+                localStorage.setItem("intensity", savedSettings[index].workoutInt);
                 $("#genre").val("playlist");
                 localStorage.setItem("playlist", savedSettings[index].playlist);
                 snack = "combo-load";
@@ -354,6 +362,9 @@ $("#load").click(function () {
                     $("#genre").val("playlist");
                     localStorage.setItem("playlist", savedSettings[index].playlist);
                     snack = "playlist-load";
+                    if (localStorage.getItem("type")) {
+                        snack = "combo-load";
+                    }
                     break;
                 }
             }
@@ -363,7 +374,9 @@ $("#load").click(function () {
                 if (savedSettings[index].name === $("#saved-workouts").val()) {
                     $("#type").val(savedSettings[index].workoutType);
                     $("#intensity").val(savedSettings[index].workoutInt);
-                    if (snack === "workout-load") {
+                    localStorage.setItem("type", savedSettings[index].workoutType);
+                    localStorage.setItem("intensity", savedSettings[index].workoutInt);
+                    if (snack === "playlist-load" || localStorage.getItem("playlist")) {
                         snack = "combo-load";
                     } else {
                         snack = "workout-load";
@@ -373,16 +386,23 @@ $("#load").click(function () {
             }
         }  
     }
-    $("#saved-playlists").val("");
-    $("#saved-workouts").val("");
-    $("#saved-combos").val("");
-    $("#saved-playlists").prop("disabled", false);
-    $("#saved-workouts").prop("disabled", false);
-    $("#saved-combos").prop("disabled", false);
-    $("#snackbar-" + snack).addClass("snackbar-show");
-    setTimeout(function () { 
-        $("#snackbar-" + snack).removeClass("snackbar-show") 
-    }, 2000);
+    if (snack === "combo-load") {
+        var buttonInput = JSON.stringify("select");
+        localStorage.setItem("pageChange", buttonInput);
+        $(location).attr("href", "workout.html");
+    } else {
+        $("#clear").prop("disabled", false);
+        $("#saved-playlists").val("");
+        $("#saved-workouts").val("");
+        $("#saved-combos").val("");
+        $("#saved-playlists").prop("disabled", false);
+        $("#saved-workouts").prop("disabled", false);
+        $("#saved-combos").prop("disabled", false);
+        $("#snackbar-" + snack).addClass("snackbar-show");
+        setTimeout(function () {
+            $("#snackbar-" + snack).removeClass("snackbar-show") 
+        }, 2000);
+    }
 });
 
 $("#name").keyup(function () {
@@ -436,7 +456,6 @@ $("#load-modal select").change(function () {
 
 $(".delete").click(function () {
     var adj = "saved" + $(this).attr("id").substring($(this).attr("id").indexOf("-")) + "s";
-    console.log($("#" + adj).val())
     for (var index = 0; index < savedSettings.length; index++) {
         if (savedSettings[index].name === $("#" + adj).val()) {
             $("option[value='" + $("#" + adj).val() +"'").remove();
@@ -456,6 +475,18 @@ $(".delete").click(function () {
     }
 });
 
+$("#clear").click(function () {
+    clearLocal();
+    $("#type").prop("selectedIndex", 0);
+    $("#intensity").prop("selectedIndex", 0);
+    $("#genre").prop("selectedIndex", 0);
+    var id = $(this).attr("id");
+    $("#snackbar-" + id).addClass("snackbar-show");
+    $(this).prop("disabled", true);
+    setTimeout(function () { 
+        $("#snackbar-" + id).removeClass("snackbar-show") 
+    }, 2000);
+});
 // when the document is loaded check the page
 $(document).ready(
     function () { 
