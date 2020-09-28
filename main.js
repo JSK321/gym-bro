@@ -202,6 +202,7 @@ function randomWorkout() {
 }
 // on page load, check the page
 function checkPage() {
+    console.log("ᕦ(ò_óˇ)");
     // grab the current url
     getLocalStorage();
     var str = $(location).attr("href");
@@ -375,6 +376,9 @@ $("#load").click(function () {
     $("#saved-playlists").val("");
     $("#saved-workouts").val("");
     $("#saved-combos").val("");
+    $("#saved-playlists").prop("disabled", false);
+    $("#saved-workouts").prop("disabled", false);
+    $("#saved-combos").prop("disabled", false);
     $("#snackbar-" + snack).addClass("snackbar-show");
     setTimeout(function () { 
         $("#snackbar-" + snack).removeClass("snackbar-show") 
